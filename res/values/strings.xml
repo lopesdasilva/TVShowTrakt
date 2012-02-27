@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TVShowTrakt</string>
+    <string name="calendar">Calendar Acrecsentar o View Pager Aqui</string>
+    <string name="friends">Friends</string>
+    <string name="history">History</string>
+    <string name="library">Library</string>
+    <string name="myshows">My Shows</string>
+    <string name="profile">Profile</string>
+    <string name="recommended">Recommended</string>
+    <string name="seen">Seen</string>
+    <string name="watchlist">Watchlist</string>
+    <string name="trendingshows">  Trending TV shows</string>
+    <string name="tvshowname">TvShow Name</string>
+    <string name="percentage">NA %</string>
+    <string name="votese"></string>
+    <string name="votes">0000 votes</string>
+    <string name="description">description</string>
+    <string name="show">Show Name</string>
+    <string name="seemore">See more  </string>
+    <string name="updating">Updating</string>
+    <string name="searching">Searching</string>
+
+          <string name="overview">Overview:</string>
+    <string name="overview_text">overview</string>
+    <string name="airs_label">"Airs: "</string>
+    <string name="airs_text">airs</string>
+    <string name="premiered">Premiered:</string>
+    <string name="country">Country:</string>
+    <string name="country_text">country</string>
+    <string name="runtime">Runtime:</string>
+    <string name="runtime_text">runtime</string>
+    <string name="certification">Certification:</string>
+    <string name="certification_text">certification</string>
+    <string name="premiered_text">premiered</string>
+    <string name="loadingshow">Loading Show</string>
+    <string name="nextepisode">Next Episode: 2x04 Empty Hands\nOn February 17, 2012</string>
+    <string name="nextepisode1"></string>
+        
+        
+</resources>
