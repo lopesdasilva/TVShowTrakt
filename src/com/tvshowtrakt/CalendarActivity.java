@@ -16,7 +16,7 @@ public class CalendarActivity extends GDActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setActionBarContentView(R.layout.calendar);
-		setTitle("Calendar");
+		setTitle("Calendar haoo");
 
 	}
 
