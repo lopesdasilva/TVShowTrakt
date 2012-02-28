@@ -40,6 +40,7 @@
     <string name="username">username</string>
     <string name="city">city</string>
     <string name="episodes">4025</string>
+    <string name="statistics">Statistics</string>
         
         
 </resources>
