@@ -39,8 +39,11 @@
     <string name="nextepisode1"></string>
     <string name="username">username</string>
     <string name="city">city</string>
-    <string name="episodes">4025</string>
+    <string name="episodes">episodes</string>
     <string name="statistics">Statistics</string>
+    <string name="views">1,025</string>
+    <string name="shows">shows</string>
+    <string name="shows2">314</string>
         
         
 </resources>
