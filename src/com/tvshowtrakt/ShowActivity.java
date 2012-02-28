@@ -61,6 +61,7 @@ public class ShowActivity extends GDActivity {
 		ImageLoaderMedium imageLoader = new ImageLoaderMedium(
 				this.getApplicationContext());
 		mListSeasons = (ListView) findViewById(R.id.listViewSeasons);
+		
 		mFanart = (ImageView) findViewById(R.id.imageViewFanArt);
 		mPoster = (ImageView) findViewById(R.id.imageViewPoster);
 
@@ -109,10 +110,10 @@ public class ShowActivity extends GDActivity {
 	}
 
 	protected void updateSeason(String imdbId) {
-		mLoading = (LinearLayout) findViewById(R.id.loading);
-		mLoading.setVisibility(LinearLayout.VISIBLE);
-		mShowInfo = (LinearLayout) findViewById(R.id.showInfo);
-		mShowInfo.setVisibility(LinearLayout.INVISIBLE);
+//		mLoading = (LinearLayout) findViewById(R.id.loading);
+//		mLoading.setVisibility(LinearLayout.VISIBLE);
+//		mShowInfo = (LinearLayout) findViewById(R.id.showInfo);
+//		mShowInfo.setVisibility(LinearLayout.INVISIBLE);
 		// TODO: Async Task
 		new downloadSeasons().execute(imdbId);
 
@@ -253,10 +254,10 @@ public class ShowActivity extends GDActivity {
 
 				LazyAdapterListSeasons lazyAdapter = new LazyAdapterListSeasons(
 						showActivity, number, poster);
-//				mListSeasons.setAdapter(lazyAdapter);
+				mListSeasons.setAdapter(lazyAdapter);
 
-				mShowInfo.setVisibility(LinearLayout.VISIBLE);
-				mLoading.setVisibility(LinearLayout.GONE);
+//				mShowInfo.setVisibility(LinearLayout.VISIBLE);
+//				mLoading.setVisibility(LinearLayout.GONE);
 			} else
 				goBlooey(e);
 		}

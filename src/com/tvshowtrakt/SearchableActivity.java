@@ -129,7 +129,8 @@ public class SearchableActivity extends GDActivity {
 		 * the result from doInBackground()
 		 */
 		protected void onPostExecute(ArrayList<TvShow> result) {
-
+			
+			
 			if (e == null) {
 
 				String[] mTitle = new String[result.size()];
