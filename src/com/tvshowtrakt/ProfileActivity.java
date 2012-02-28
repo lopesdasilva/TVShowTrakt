@@ -19,11 +19,9 @@ public class ProfileActivity extends GDActivity {
 		setActionBarContentView(R.layout.profile);
 		setTitle("Profile");
 		
-		TextView v= (TextView) findViewById(R.id.textViewProfile);
-		
 		//Obter as preferências da aplicação
 				getPrefs();
-		v.setText(username);
+	
 		
 	}
 	
