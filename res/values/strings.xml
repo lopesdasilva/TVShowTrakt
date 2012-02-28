@@ -37,6 +37,9 @@
     <string name="loadingshow">Loading Show</string>
     <string name="nextepisode">Next Episode: 2x04 Empty Hands\nOn February 17, 2012</string>
     <string name="nextepisode1"></string>
+    <string name="username">username</string>
+    <string name="city">city</string>
+    <string name="episodes">4025</string>
         
         
 </resources>

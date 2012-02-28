@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.cyrilmottier.android.greendroid;
+package com.viewpagerindicator;
 
 public final class R {
     public static final class anim {

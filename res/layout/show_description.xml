@@ -15,86 +15,84 @@
             android:layout_height="fill_parent"
             android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/overview"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/overview"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/textView_overview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/overview_text" />
+            <TextView
+                android:id="@+id/textView_overview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/overview_text" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/airs_label"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/airs_label"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/textView_airs"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/airs_text" />
+            <TextView
+                android:id="@+id/textView_airs"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/airs_text" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/premiered"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/premiered"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/textView_premiered"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/premiered_text" />
+            <TextView
+                android:id="@+id/textView_premiered"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/premiered_text" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/country"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/country"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/textView_country"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/country_text" />
+            <TextView
+                android:id="@+id/textView_country"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/country_text" />
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/runtime"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/runtime"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/textView_runtime"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/runtime_text" />
+            <TextView
+                android:id="@+id/textView_runtime"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/runtime_text" />
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/certification"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/certification"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/textView_certification"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/certification_text" />
+            <TextView
+                android:id="@+id/textView_certification"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/certification_text" />
         </LinearLayout>
     </ScrollView>
-
-   
 
 </LinearLayout>

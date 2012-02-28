@@ -71,7 +71,7 @@
             <ProgressBar
                 android:id="@+id/progressBarGalleryTrending"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/textViewUpdating"
@@ -82,7 +82,6 @@
                 android:text="@string/updating"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </LinearLayout>
-
     </RelativeLayout>
 
 </LinearLayout>

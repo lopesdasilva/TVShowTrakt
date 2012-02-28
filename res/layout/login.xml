@@ -1,31 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:background="#e2e2e2">
-    <RelativeLayout android:id="@+id/relativeLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent">
-        <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginLeft="33dp" android:layout_marginTop="150dp" android:layout_centerInParent="true" android:layout_width="fill_parent">
-            <LinearLayout android:layout_width="fill_parent" android:id="@+id/linearLayout2" android:layout_height="wrap_content">
-                <TextView android:textColor="#000000"  android:id="@+id/textView5" android:text="Sign In " android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content" android:textSize="25dp"></TextView>
-                <TextView android:textColor="#999999" android:id="@+id/textView4" android:text="to trakt" android:layout_height="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_width="wrap_content" android:textSize="25dp"></TextView>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#e2e2e2"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="33dp"
+            android:layout_marginTop="150dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sign In "
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#000000"
+                    android:textSize="25dp" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="to trakt"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#999999"
+                    android:textSize="25dp" >
+                </TextView>
             </LinearLayout>
-            <TextView android:textAppearance="?android:attr/textAppearanceMedium" android:textColor="#000000"  android:text="Username:" android:id="@+id/textView2" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
-            <EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:inputType="textPersonName" android:id="@+id/username"></EditText>
-            <requestFocus></requestFocus>
-            <LinearLayout android:layout_width="fill_parent" android:id="@+id/linearLayout4" android:layout_height="wrap_content" android:baselineAligned="false">
-                <TextView android:textAppearance="?android:attr/textAppearanceMedium" android:id="@+id/textView3" android:text="Password:" android:textColor="#000000" android:layout_height="wrap_content" android:layout_weight="1" android:layout_width="0dp"></TextView>
-                <TextView android:textAppearance="?android:attr/textAppearanceMedium" android:textColor="#008fbb" android:id="@+id/forgot" android:text="forgot?" android:layout_height="wrap_content" android:layout_width="wrap_content"></TextView>
-            </LinearLayout>
-            <EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:inputType="textPassword" android:id="@+id/password" android:lines="1">
-                
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username:"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#000000" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName" >
             </EditText>
-            <LinearLayout android:layout_width="fill_parent" android:id="@+id/linearLayout3" android:layout_height="wrap_content">
-                <ImageView android:src="@drawable/signin" android:layout_width="90dp" android:clickable="true" android:layout_height="46dp" android:id="@+id/signin"></ImageView>
+
+            <requestFocus >
+            </requestFocus>
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Password:"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#000000" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/forgot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="forgot?"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#008fbb" >
+                </TextView>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:lines="1" >
+            </EditText>
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/signin"
+                    android:layout_width="90dp"
+                    android:layout_height="46dp"
+                    android:clickable="true"
+                    android:src="@drawable/signin" >
+                </ImageView>
             </LinearLayout>
         </LinearLayout>
-        <RelativeLayout android:id="@+id/relativeLayout2" android:layout_alignParentTop="true" android:layout_alignParentLeft="true" android:layout_width="fill_parent" android:background="@drawable/topbar" android:layout_height="50dp">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/topbar" >
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -34,7 +128,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/ic_launcher" >
-</ImageView>
+            </ImageView>
 
             <TextView
                 android:id="@+id/textView1"
@@ -45,9 +139,17 @@
                 android:text="@string/app_name"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="27dp" >
-</TextView>
+            </TextView>
         </RelativeLayout>
-        <ProgressBar android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:layout_centerInParent="true" android:id="@+id/progressBar" android:visibility="gone"></ProgressBar>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="14dp"
+            android:visibility="gone" >
+        </ProgressBar>
     </RelativeLayout>
-    
+
 </LinearLayout>

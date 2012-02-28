@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent">
-   
-    <RelativeLayout android:layout_width="fill_parent" android:id="@+id/relativeLayout1" android:gravity="center_vertical" android:layout_height="fill_parent">
-       
-        <ListView  android:background="@android:color/black" android:layout_width="fill_parent" android:id="@+id/searchResults" android:layout_height="fill_parent"></ListView>
-         <LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_vertical" >
+
+        <ListView
+            android:id="@+id/searchResults"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@android:color/black" >
+        </ListView>
+
+        <LinearLayout
             android:id="@+id/loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,9 +36,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="@string/searching"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
-
         </LinearLayout>
     </RelativeLayout>
 
-    
 </LinearLayout>

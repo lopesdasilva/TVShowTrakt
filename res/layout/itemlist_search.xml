@@ -80,7 +80,6 @@
                 android:layout_below="@+id/textViewVotes"
                 android:text="@string/description"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
-
         </RelativeLayout>
     </LinearLayout>
 

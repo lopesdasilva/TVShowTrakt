@@ -47,7 +47,6 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="14dp"
                 android:src="@drawable/icon_watchlist_color" />
-
         </RelativeLayout>
 
         <RelativeLayout
@@ -89,9 +88,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/lovetag" />
-
         </RelativeLayout>
-    
     </LinearLayout>
 
     <RelativeLayout

@@ -2,18 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="200dp"
-    android:orientation="vertical">
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/text"
         android:layout_width="fill_parent"
         android:layout_height="30dp"
         android:background="#333333"
+        android:clickable="false"
         android:text="@string/tvshowname"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColorHighlight="@android:color/white"
-        android:textColorLink="@android:color/white"
-        android:clickable="false" />
+        android:textColorLink="@android:color/white" />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -43,7 +43,6 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/icon_watchlist_color" />
-
         </RelativeLayout>
 
         <RelativeLayout
@@ -95,10 +94,9 @@
                 android:layout_height="100dp"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/textViewVotes"
+                android:paddingLeft="2dp"
                 android:text="@string/description"
-                android:textAppearance="?android:attr/textAppearanceSmall" 
-                android:paddingLeft="2dp"/>
-
+                android:textAppearance="?android:attr/textAppearanceSmall" />
         </RelativeLayout>
     </LinearLayout>
 
