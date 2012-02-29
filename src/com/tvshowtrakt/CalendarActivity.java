@@ -111,7 +111,7 @@ public class CalendarActivity extends GDActivity {
 				manager.setApiKey(apikey);
 
 				List<CalendarDate> calShows = manager.userService()
-						.calendarShows("lopesdasilva").date(d).fire();
+						.calendarShows(username).date(d).fire();
 				return calShows;
 
 			} catch (Exception e) {
