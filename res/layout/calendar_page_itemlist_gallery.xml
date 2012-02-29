@@ -4,7 +4,8 @@
     android:layout_width="fill_parent"
     android:layout_height="200dp"
     android:orientation="vertical"
-    android:padding="10dp" >
+    android:paddingLeft="10dp" 
+    android:paddingRight="10dp">
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
@@ -21,7 +22,7 @@
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="fill_parent"
-            android:layout_height="75dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:background="#80000000"
@@ -32,17 +33,36 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/show"
+                android:textStyle="bold"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@android:color/white"
                 android:textColorHighlight="@android:color/white" />
 
-            <TextView
-                android:id="@+id/textViewEpisodeName"
+            <LinearLayout
+                android:id="@+id/linearLayout3"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/nextepisode"
-                android:textColor="@android:color/white"
-                android:textColorHighlight="@android:color/white" />
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textViewEpisodeNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/epsiodenumber"
+                    android:textColor="#008FBB"
+                    android:textStyle="bold"
+                    android:textColorHighlight="#008FBB"/>
+
+                <TextView
+                    android:id="@+id/textViewEpisodeName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="20dp"
+                    android:text="@string/episodeTitle"
+                    android:textColor="@android:color/white"
+                    android:textColorHighlight="@android:color/white"
+                    android:paddingLeft="2dp" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </RelativeLayout>

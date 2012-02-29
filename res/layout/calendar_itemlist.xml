@@ -16,6 +16,8 @@
     <Gallery
         android:id="@+id/galleryEpisodes"
         android:layout_width="fill_parent"
-        android:layout_height="120dp" />
+        android:layout_height="120dp"
+        android:paddingLeft="40dp" 
+        android:background="#E8E8DC"/>
 
 </LinearLayout>

@@ -21,13 +21,15 @@ public class LazyAdapterGalleryEpisodes extends BaseAdapter {
 	private static LayoutInflater inflater = null;
 	public ImageLoaderMedium imageLoader;
 	private String[] mEpisodes;
+	private String[] mNumbers;
 //	 mFanArt, mName, mEpisode
 	public LazyAdapterGalleryEpisodes(Activity a, String[] fanArt, String[] name,
-			String[] episodes) {
+			String[] episodes,String[] number) {
 		mNames = name;
 		mEpisodes = episodes;
 		activity = a;
 		mFanArt = fanArt;
+		mNumbers=number;
 		inflater = (LayoutInflater) activity
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		imageLoader = new ImageLoaderMedium(activity.getApplicationContext());
@@ -55,7 +57,8 @@ public class LazyAdapterGalleryEpisodes extends BaseAdapter {
 		
 		mName.setText(mNames[position]);
 		mEpisode.setText(mEpisodes[position]);
-		
+		TextView mNumber = (TextView) vi.findViewById(R.id.textViewEpisodeNumber);
+				mNumber.setText(mNumbers[position]);
 		
 		ImageView image = (ImageView) vi.findViewById(R.id.imageViewEpisode);
 		
