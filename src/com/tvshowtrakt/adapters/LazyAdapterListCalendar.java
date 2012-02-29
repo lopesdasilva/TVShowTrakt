@@ -60,7 +60,7 @@ public class LazyAdapterListCalendar extends BaseAdapter {
 
 
 			TextView t = (TextView) vi.findViewById(R.id.textViewDate);
-			SimpleDateFormat sdf1= new SimpleDateFormat("E MMM dd, yyyy"); //você pode usar outras máscaras
+			SimpleDateFormat sdf1= new SimpleDateFormat("E MMM dd, yyyy"); //voce pode usar outras m‚Ä°scaras
 			t.setText(sdf1.format(calendarDate.get(position).date));
 			
 			
