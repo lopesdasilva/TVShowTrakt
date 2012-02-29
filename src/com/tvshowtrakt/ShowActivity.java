@@ -1,5 +1,6 @@
 package com.tvshowtrakt;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import imageloaders.ImageLoaderMedium;
@@ -201,7 +202,8 @@ public class ShowActivity extends GDActivity {
 				mOverview.setText(result.overview);
 				mCountry.setText(result.country);
 				mAirs.setText(result.airTime + " on " + result.network);
-				mPremiered.setText(result.firstAired.toLocaleString());
+				SimpleDateFormat sdf1= new SimpleDateFormat("MMM dd, yyyy"); 
+				mPremiered.setText( sdf1.format(result.firstAired));
 				mRuntime.setText(result.runtime + "m");
 				mCertification.setText(result.certification);
 
@@ -245,17 +247,18 @@ public class ShowActivity extends GDActivity {
 				
 				int i = 0;
 				String number[] = new String[result.size()];
-				
+				String episodesNumber[] = new String[result.size()];
 				String poster[] = new String[result.size()];
 				
 				for (TvShowSeason showSeason : result) {
 					number[i] = showSeason.season + "";
+					episodesNumber[i]=showSeason.episodes.count+" episodes";
 					poster[i] = showSeason.images.poster;
 					i++;
 				}
 				mListSeasons = (ListView) findViewById(R.id.listViewSeasons);
 				LazyAdapterListSeasons lazyAdapter = new LazyAdapterListSeasons(
-						showActivity, number, poster);
+						showActivity, number, poster,episodesNumber);
 				mListSeasons.setAdapter(lazyAdapter);
 				
 //				mListSeasons.setVisibility(ListView.VISIBLE);

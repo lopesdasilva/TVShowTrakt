@@ -19,7 +19,7 @@ public class ViewPagerAdapterCalendar extends PagerAdapter
     {
         "Last Week",
         "This Week",
-        "Next Week",
+        "Next Week"
     };
     private final Context context;
  
@@ -47,7 +47,19 @@ public class ViewPagerAdapterCalendar extends PagerAdapter
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 
-        View view = inflater.inflate(R.layout.calendar_page, null);
+        int resId = 0;
+        switch (position) {
+        case 0:
+            resId = R.layout.calendar_page_last;
+            break;
+        case 1:
+            resId = R.layout.calendar_page_this;
+            break;
+        case 2:
+        	resId= R.layout.calendar_page_next;
+       
+        }
+        View view = inflater.inflate(resId, null);
 
         ((ViewPager) collection).addView(view,0 );
 

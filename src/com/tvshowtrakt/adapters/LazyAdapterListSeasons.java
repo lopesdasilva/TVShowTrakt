@@ -20,13 +20,14 @@ public class LazyAdapterListSeasons extends BaseAdapter {
 	public ImageLoader imageLoader;
 	private String[] number; 
 	private String[] poster;
-
+	private String[] episodesNumber;
 	
 	
-	public LazyAdapterListSeasons(Activity a, String[] number, String[] poster) {
+	public LazyAdapterListSeasons(Activity a, String[] number, String[] poster,String[] episodesNumber) {
 		this.number=number;
 		this.poster=poster;
 		this.activity=a;
+		this.episodesNumber=episodesNumber;
 		inflater = (LayoutInflater) activity
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		imageLoader = new ImageLoader(activity.getApplicationContext());
@@ -49,7 +50,8 @@ public class LazyAdapterListSeasons extends BaseAdapter {
 		if (convertView == null)
 			vi = inflater.inflate(R.layout.show_seasons_itemlist, null);
 
-		
+		TextView mEpNumber = (TextView) vi.findViewById(R.id.textViewEpisodesNumber);
+		mEpNumber.setText(episodesNumber[position]);
 
 		TextView mNumber = (TextView) vi.findViewById(R.id.textViewSeasonNumber);
 		mNumber.setText("Season "+number[position]);

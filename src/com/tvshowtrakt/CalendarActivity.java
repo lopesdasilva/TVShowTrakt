@@ -3,6 +3,8 @@ package com.tvshowtrakt;
 import java.util.Date;
 import java.util.List;
 
+import views.CalendarViewPager;
+
 import com.jakewharton.trakt.ServiceManager;
 import com.jakewharton.trakt.entities.CalendarDate;
 import com.jakewharton.trakt.entities.CalendarDate.CalendarTvShowEpisode;
@@ -21,6 +23,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -38,7 +41,7 @@ public class CalendarActivity extends GDActivity {
 	private CalendarActivity calendarActivity;
 	ListView mListSeasons;
 	private ViewPagerAdapterCalendar mAdapter;
-	private ViewPager mPager;
+	private CalendarViewPager mPager;
 	private TitlePageIndicator mIndicator;
 	public boolean[] tSeen;
 	Gallery mGalleryEpisodes;
@@ -52,20 +55,41 @@ public class CalendarActivity extends GDActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setActionBarContentView(R.layout.calendar_page);
+		setActionBarContentView(R.layout.calendar);
 		setTitle("Calendar");
 
 		calendarActivity = this;
 		getPrefs();
-		// mAdapter = new ViewPagerAdapterCalendar(getApplicationContext());
+		mAdapter = new ViewPagerAdapterCalendar(getApplicationContext());
 		//
-		// mPager = (ViewPager) findViewById(R.id.pager);
-		// mPager.setAdapter(mAdapter);
+		mPager = (CalendarViewPager) findViewById(R.id.pager);
+		mPager.setPagingEnabled(false);
+		mPager.setAdapter(mAdapter);
 		//
-		// mIndicator = (TitlePageIndicator) findViewById(R.id.indicator);
-		// mIndicator.setViewPager(mPager);
-		// mIndicator.setCurrentItem(1);
-		new downloadCalendarInfo().execute();
+		mIndicator = (TitlePageIndicator) findViewById(R.id.indicator);
+		mIndicator.setViewPager(mPager);
+		mIndicator.setCurrentItem(1);
+
+//		updateCalendarInfo(1);
+		updateCalendarInfo(0);
+	}
+
+	private void updateCalendarInfo(int i) {
+		switch (i) {
+		case 0:
+			// mPager.setVisibility(CalendarViewPager.INVISIBLE);
+			new downloadCalendarInfo().execute("0");
+			break;
+		case 1:
+			// mPager.setVisibility(CalendarViewPager.INVISIBLE);
+			new downloadCalendarInfo().execute("1");
+			break;
+		case 2:
+			// mPager.setVisibility(CalendarViewPager.INVISIBLE);
+			new downloadCalendarInfo().execute("2");
+			break;
+		}
+
 	}
 
 	/**
@@ -98,13 +122,16 @@ public class CalendarActivity extends GDActivity {
 	private class downloadCalendarInfo extends
 			AsyncTask<String, Void, List<CalendarDate>> {
 		private Exception e = null;
+		int page;
 
 		/**
 		 * primeiro método a correr, usar o manager para obter os dados da api
 		 */
 		@Override
 		protected List<CalendarDate> doInBackground(String... params) {
-
+			page = Integer.parseInt(params[0]);
+			// One Week
+			long i = 604800000;
 			try {
 				Date d = new Date();
 				ServiceManager manager = new ServiceManager();
@@ -112,9 +139,19 @@ public class CalendarActivity extends GDActivity {
 						new Password().parseSHA1Password(password));
 				manager.setApiKey(apikey);
 
-				List<CalendarDate> calShows = manager.userService()
-						.calendarShows(username).date(d).fire();
-				return calShows;
+				switch (page) {
+				case 0:
+					d.setTime(d.getTime() - i);
+					return manager.userService().calendarShows(username)
+							.date(d).fire();
+				case 1:
+					return manager.userService().calendarShows(username)
+							.date(d).fire();
+				case 2:
+					d.setTime(d.getTime() + i);
+					return manager.userService().calendarShows(username)
+							.date(d).fire();
+				}
 
 			} catch (Exception e) {
 				this.e = e;
@@ -127,39 +164,24 @@ public class CalendarActivity extends GDActivity {
 		 */
 		protected void onPostExecute(List<CalendarDate> result) {
 			if (e == null) {
-				CalendarDate calendarDate = result.get(0);
-				
-				
-			
-				
-				LazyAdapterListCalendar lazyAdapter = new LazyAdapterListCalendar(calendarActivity,result);
-				ListView l = (ListView) findViewById(R.id.listViewCalendar);
+				LazyAdapterListCalendar lazyAdapter = new LazyAdapterListCalendar(
+						calendarActivity, result);
+				ListView l = null;
+				switch (page) {
+				case 0:
+					l = (ListView) findViewById(R.id.listViewCalendar_last);
+					break;
+				case 1:
+					l = (ListView) findViewById(R.id.listViewCalendar_this);
+					break;
+				case 2:
+					l = (ListView) findViewById(R.id.listViewCalendar_next);
+					break;
+				}
+
 				l.setAdapter(lazyAdapter);
-				
-				
-				
-//				
-//				TextView t = (TextView) findViewById(R.id.textViewDate);
-//				CalendarDate calendarDate = result.get(0);
-//
-//					t.setText(calendarDate.date.toLocaleString());
-//					
-//					String mFanArt[] = new String[calendarDate.episodes.size()];
-//					String mName[] = new String[calendarDate.episodes.size()];
-//					String mEpisode[] = new String[calendarDate.episodes.size()];
-//					int i=0;
-//					for (CalendarTvShowEpisode e: calendarDate.episodes){
-//						mFanArt[i]=e.episode.images.screen;
-//						mName[i]=e.show.title;
-//						mEpisode[i]=e.episode.title;
-//						i++;
-//					}
-//					
-//					galleryEpisodesAdapter = new LazyAdapterGalleryEpisodes(calendarActivity, mFanArt, mName, mEpisode);
-//					mGalleryEpisodes = (Gallery) findViewById(R.id.galleryEpisodes);
-//					mGalleryEpisodes.setAdapter(galleryEpisodesAdapter);
-					
-					
+				// mPager.setVisibility(CalendarViewPager.VISIBLE);
+
 			} else
 				goBlooey(e);
 		}

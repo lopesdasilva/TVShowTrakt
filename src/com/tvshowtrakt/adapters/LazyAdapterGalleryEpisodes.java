@@ -22,14 +22,16 @@ public class LazyAdapterGalleryEpisodes extends BaseAdapter {
 	public ImageLoaderMedium imageLoader;
 	private String[] mEpisodes;
 	private String[] mNumbers;
+	private boolean[] mWatched;
 //	 mFanArt, mName, mEpisode
 	public LazyAdapterGalleryEpisodes(Activity a, String[] fanArt, String[] name,
-			String[] episodes,String[] number) {
+			String[] episodes,String[] number,boolean watched[]) {
 		mNames = name;
 		mEpisodes = episodes;
 		activity = a;
 		mFanArt = fanArt;
 		mNumbers=number;
+		mWatched=watched;
 		inflater = (LayoutInflater) activity
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		imageLoader = new ImageLoaderMedium(activity.getApplicationContext());
@@ -59,7 +61,11 @@ public class LazyAdapterGalleryEpisodes extends BaseAdapter {
 		mEpisode.setText(mEpisodes[position]);
 		TextView mNumber = (TextView) vi.findViewById(R.id.textViewEpisodeNumber);
 				mNumber.setText(mNumbers[position]);
-		
+		ImageView watched = (ImageView) vi.findViewById(R.id.imageViewCalendarSeen);
+		if (!mWatched[position])
+		watched.setVisibility(ImageView.INVISIBLE);
+				
+				
 		ImageView image = (ImageView) vi.findViewById(R.id.imageViewEpisode);
 		
 		image.setScaleType(ImageView.ScaleType.FIT_XY);

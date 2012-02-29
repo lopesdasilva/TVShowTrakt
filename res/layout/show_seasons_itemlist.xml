@@ -22,15 +22,31 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
 
-        <TextView
-            android:id="@+id/textViewSeasonNumber"
+        <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:paddingLeft="10dp"
-            android:text="@string/season"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:orientation="vertical"
+             android:paddingLeft="10dp" >
+
+            <TextView
+                android:id="@+id/textViewSeasonNumber"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/season"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/textViewEpisodesNumber"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/episodes"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/darker_gray" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 

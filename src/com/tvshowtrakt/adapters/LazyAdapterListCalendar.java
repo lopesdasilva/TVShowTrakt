@@ -29,8 +29,8 @@ public class LazyAdapterListCalendar extends BaseAdapter {
 	private static LayoutInflater inflater=null;
 	public ImageLoader imageLoader;
 	private List<CalendarDate> calendarDate;
-	
-	
+	Gallery mGalleryEpisodes;
+	LazyAdapterGalleryEpisodes galleryEpisodesAdapter;
 	
 	public LazyAdapterListCalendar(Activity calendarActivity,
 			List<CalendarDate> listCalendarDate) {
@@ -60,7 +60,7 @@ public class LazyAdapterListCalendar extends BaseAdapter {
 
 
 			TextView t = (TextView) vi.findViewById(R.id.textViewDate);
-			SimpleDateFormat sdf1= new SimpleDateFormat("E MMM dd, yyyy"); //voce pode usar outras m‚Ä°scaras
+			SimpleDateFormat sdf1= new SimpleDateFormat("E MMM dd, yyyy"); //você pode usar outras máscaras
 			t.setText(sdf1.format(calendarDate.get(position).date));
 			
 			
@@ -68,12 +68,14 @@ public class LazyAdapterListCalendar extends BaseAdapter {
 			String mName[] = new String[calendarDate.get(position).episodes.size()];
 			String mEpisode[] = new String[calendarDate.get(position).episodes.size()];
 			String mNumber[] = new String[calendarDate.get(position).episodes.size()];
+			boolean mWatched[]=new boolean [calendarDate.get(position).episodes.size()];
 			int i=0;
 			for (CalendarTvShowEpisode e: calendarDate.get(position).episodes){
 				mFanArt[i]=e.episode.images.screen;
 				mName[i]=e.show.title;
 				mNumber[i]=e.episode.season +"x"+e.episode.number;
 				mEpisode[i]=e.episode.title;
+				mWatched[i]=e.episode.watched;
 				i++;
 			}
 			
@@ -82,8 +84,8 @@ public class LazyAdapterListCalendar extends BaseAdapter {
 			activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
 			
 			
-			LazyAdapterGalleryEpisodes galleryEpisodesAdapter = new LazyAdapterGalleryEpisodes(activity, mFanArt, mName, mEpisode,mNumber);
-			Gallery mGalleryEpisodes = (Gallery) vi.findViewById(R.id.galleryEpisodes);
+			 galleryEpisodesAdapter = new LazyAdapterGalleryEpisodes(activity, mFanArt, mName, mEpisode,mNumber,mWatched);
+			mGalleryEpisodes = (Gallery) vi.findViewById(R.id.galleryEpisodes);
 			
 			//para a galleria ficar alinhada a esquerda
 			MarginLayoutParams mlp = (MarginLayoutParams) mGalleryEpisodes.getLayoutParams();

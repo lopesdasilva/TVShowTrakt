@@ -12,10 +12,11 @@
             android:padding="10dip" 
             style="@style/Widget.MyTitlepageIndicator"/>
 
-        <android.support.v4.view.ViewPager
+        <views.CalendarViewPager
             android:id="@+id/pager"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+             />
 
 </LinearLayout>
