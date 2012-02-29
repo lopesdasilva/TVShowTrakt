@@ -215,7 +215,6 @@ public class GalleryActivity extends GDActivity {
 				manager.setApiKey(apikey);
 
 				List<TvShow> mlist = manager.showService().trending().fire();
-
 				ArrayList<TvShow> d = new ArrayList<TvShow>();
 				// TODO URGENTE isto Ž para melhorar (passar como return)
 				mlist = mlist.subList(0, 10);

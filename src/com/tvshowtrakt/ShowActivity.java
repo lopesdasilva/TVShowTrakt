@@ -189,7 +189,7 @@ public class ShowActivity extends GDActivity {
 		 */
 		protected void onPostExecute(TvShow result) {
 			if (e == null) {
-
+				
 				TextView mOverview = (TextView) findViewById(R.id.textView_overview);
 				TextView mCountry = (TextView) findViewById(R.id.textView_country);
 				TextView mAirs = (TextView) findViewById(R.id.textView_airs);

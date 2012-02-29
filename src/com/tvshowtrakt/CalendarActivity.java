@@ -9,6 +9,8 @@ import com.jakewharton.trakt.entities.CalendarDate.CalendarTvShowEpisode;
 import com.jakewharton.trakt.entities.TvShow;
 import com.tvshowtrakt.adapters.LazyAdapterGalleryEpisodes;
 import com.tvshowtrakt.adapters.LazyAdapterGalleryTrending;
+import com.tvshowtrakt.adapters.LazyAdapterListCalendar;
+import com.tvshowtrakt.adapters.LazyAdapterListTrending;
 import com.tvshowtrakt.adapters.ViewPagerAdapterCalendar;
 import com.viewpagerindicator.TitlePageIndicator;
 
@@ -50,7 +52,7 @@ public class CalendarActivity extends GDActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setActionBarContentView(R.layout.calendar_itemlist);
+		setActionBarContentView(R.layout.calendar_page);
 		setTitle("Calendar");
 
 		calendarActivity = this;
@@ -125,25 +127,37 @@ public class CalendarActivity extends GDActivity {
 		 */
 		protected void onPostExecute(List<CalendarDate> result) {
 			if (e == null) {
-				TextView t = (TextView) findViewById(R.id.textViewDate);
 				CalendarDate calendarDate = result.get(0);
-//				Thursday March 1, 2012
-					t.setText(calendarDate.date.toLocaleString());
-					
-					String mFanArt[] = new String[calendarDate.episodes.size()];
-					String mName[] = new String[calendarDate.episodes.size()];
-					String mEpisode[] = new String[calendarDate.episodes.size()];
-					int i=0;
-					for (CalendarTvShowEpisode e: calendarDate.episodes){
-						mFanArt[i]=e.episode.images.screen;
-						mName[i]=e.show.title;
-						mEpisode[i]=e.episode.title;
-						i++;
-					}
-					
-					galleryEpisodesAdapter = new LazyAdapterGalleryEpisodes(calendarActivity, mFanArt, mName, mEpisode);
-					mGalleryEpisodes = (Gallery) findViewById(R.id.galleryEpisodes);
-					mGalleryEpisodes.setAdapter(galleryEpisodesAdapter);
+				
+				
+			
+				
+				LazyAdapterListCalendar lazyAdapter = new LazyAdapterListCalendar(calendarActivity,result);
+				ListView l = (ListView) findViewById(R.id.listViewCalendar);
+				l.setAdapter(lazyAdapter);
+				
+				
+				
+//				
+//				TextView t = (TextView) findViewById(R.id.textViewDate);
+//				CalendarDate calendarDate = result.get(0);
+//
+//					t.setText(calendarDate.date.toLocaleString());
+//					
+//					String mFanArt[] = new String[calendarDate.episodes.size()];
+//					String mName[] = new String[calendarDate.episodes.size()];
+//					String mEpisode[] = new String[calendarDate.episodes.size()];
+//					int i=0;
+//					for (CalendarTvShowEpisode e: calendarDate.episodes){
+//						mFanArt[i]=e.episode.images.screen;
+//						mName[i]=e.show.title;
+//						mEpisode[i]=e.episode.title;
+//						i++;
+//					}
+//					
+//					galleryEpisodesAdapter = new LazyAdapterGalleryEpisodes(calendarActivity, mFanArt, mName, mEpisode);
+//					mGalleryEpisodes = (Gallery) findViewById(R.id.galleryEpisodes);
+//					mGalleryEpisodes.setAdapter(galleryEpisodesAdapter);
 					
 					
 			} else
