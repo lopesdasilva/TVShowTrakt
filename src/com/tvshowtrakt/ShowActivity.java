@@ -8,7 +8,7 @@ import com.jakewharton.trakt.ServiceManager;
 import com.jakewharton.trakt.entities.TvShow;
 import com.jakewharton.trakt.entities.TvShowSeason;
 import com.tvshowtrakt.adapters.LazyAdapterListSeasons;
-import com.tvshowtrakt.adapters.ViewPagerAdapter;
+import com.tvshowtrakt.adapters.ViewPagerAdapterSeasons;
 import com.viewpagerindicator.TitlePageIndicator;
 
 import greendroid.app.GDActivity;
@@ -34,13 +34,13 @@ public class ShowActivity extends GDActivity {
 	String password;
 	public String apikey = "a7b42c4fb5c50a85c68731b25cc3c1ed";
 
-	ViewPagerAdapter mAdapter;
+	ViewPagerAdapterSeasons mAdapter;
 	TitlePageIndicator mIndicator;
 	ViewPager mPager;
 
 	private LinearLayout mShowInfo;
 	private LinearLayout mLoading;
-	private ListView mListSeasons;
+	public ListView mListSeasons;
 	public Activity showActivity;
 
 	@Override
@@ -60,7 +60,7 @@ public class ShowActivity extends GDActivity {
 
 		ImageLoaderMedium imageLoader = new ImageLoaderMedium(
 				this.getApplicationContext());
-		mListSeasons = (ListView) findViewById(R.id.listViewSeasons);
+		
 		
 		mFanart = (ImageView) findViewById(R.id.imageViewFanArt);
 		mPoster = (ImageView) findViewById(R.id.imageViewPoster);
@@ -68,53 +68,57 @@ public class ShowActivity extends GDActivity {
 		imageLoader.DisplayImage(show.images.poster, this, mPoster);
 		imageLoader.DisplayImage(show.images.fanart, this, mFanart);
 
-		mAdapter = new ViewPagerAdapter(getApplicationContext());
+		mAdapter = new ViewPagerAdapterSeasons(getApplicationContext());
 		//
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mPager.setAdapter(mAdapter);
 		//
 		mIndicator = (TitlePageIndicator) findViewById(R.id.indicator);
 		mIndicator.setViewPager(mPager);
-		mIndicator
-				.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-					@Override
-					public void onPageSelected(int position) {
-						switch (position) {
-
-						case 1:
-							updateSeason(show.imdbId);
-							break;
-						}
-
-					}
-
-					@Override
-					public void onPageScrolled(int arg0, float arg1, int arg2) {
-						// TODO Auto-generated method stub
-
-					}
-
-					@Override
-					public void onPageScrollStateChanged(int arg0) {
-						// TODO Auto-generated method stub
-
-					}
-				});
+//		mIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//
+//					@Override
+//					public void onPageSelected(int position) {
+//						switch (position) {
+//
+//						case 1:
+//							
+//							break;
+//						}
+//
+//					}
+//
+//					@Override
+//					public void onPageScrolled(int arg0, float arg1, int arg2) {
+//						// TODO Auto-generated method stub
+//
+//					}
+//
+//					@Override
+//					public void onPageScrollStateChanged(int arg0) {
+//						// TODO Auto-generated method stub
+//
+//					}
+//				});
 
 		// primeira vez para fazer o update
+		updateSeason(show.imdbId);
+
 		updateShow(show.imdbId);
 		// Update Assincrono de elementos extra do show.
-		new downloadShowExtraInfo().execute(show.imdbId);
+//		new downloadShowExtraInfo().execute(show.imdbId);
 
 	}
 
 	protected void updateSeason(String imdbId) {
-//		mLoading = (LinearLayout) findViewById(R.id.loading);
+//		mLoading= (LinearLayout) findViewById(R.id.loading);
 //		mLoading.setVisibility(LinearLayout.VISIBLE);
+//		mPager.setVisibility(LinearLayout.INVISIBLE);
 //		mShowInfo = (LinearLayout) findViewById(R.id.showInfo);
 //		mShowInfo.setVisibility(LinearLayout.INVISIBLE);
 		// TODO: Async Task
+		
+//		mListSeasons.setVisibility(ListView.INVISIBLE);
 		new downloadSeasons().execute(imdbId);
 
 	}
@@ -238,9 +242,7 @@ public class ShowActivity extends GDActivity {
 		 */
 		protected void onPostExecute(List<TvShowSeason> result) {
 			if (e == null) {
-				TextView t = (TextView) findViewById(R.id.textView1);
-				t.setText("Number of Seasons " + result.size());
-
+				
 				int i = 0;
 				String number[] = new String[result.size()];
 				
@@ -251,11 +253,13 @@ public class ShowActivity extends GDActivity {
 					poster[i] = showSeason.images.poster;
 					i++;
 				}
-
+				mListSeasons = (ListView) findViewById(R.id.listViewSeasons);
 				LazyAdapterListSeasons lazyAdapter = new LazyAdapterListSeasons(
 						showActivity, number, poster);
 				mListSeasons.setAdapter(lazyAdapter);
-
+				
+//				mListSeasons.setVisibility(ListView.VISIBLE);
+//				mPager.setVisibility(LinearLayout.VISIBLE);
 //				mShowInfo.setVisibility(LinearLayout.VISIBLE);
 //				mLoading.setVisibility(LinearLayout.GONE);
 			} else

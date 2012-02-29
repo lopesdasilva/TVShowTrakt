@@ -44,6 +44,8 @@
     <string name="views">1,025</string>
     <string name="shows">shows</string>
     <string name="shows2">314</string>
+    <string name="season">Season 0</string>
+    <string name="date">Thursday March 1, 2012</string>
         
         
 </resources>

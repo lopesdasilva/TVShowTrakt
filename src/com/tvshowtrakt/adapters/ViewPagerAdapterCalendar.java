@@ -12,17 +12,18 @@ import android.widget.TextView;
 import com.tvshowtrakt.R;
 import com.viewpagerindicator.TitleProvider;
  
-public class ViewPagerAdapter extends PagerAdapter
+public class ViewPagerAdapterCalendar extends PagerAdapter
     implements TitleProvider
 {
     private static String[] titles = new String[]
     {
-        "Info",
-        "Seasons"
+        "Last Week",
+        "This Week",
+        "Next Week",
     };
     private final Context context;
  
-    public ViewPagerAdapter( Context context )
+    public ViewPagerAdapterCalendar( Context context )
     {
         this.context = context;
     }
@@ -45,20 +46,10 @@ public class ViewPagerAdapter extends PagerAdapter
     	LayoutInflater inflater = (LayoutInflater) collection.getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        int resId = 0;
-        switch (position) {
-        case 0:
-            resId = R.layout.show_description;
-            break;
-        case 1:
-            resId = R.layout.show_seasons;
-            break;
-       
-        }
 
-        View view = inflater.inflate(resId, null);
+        View view = inflater.inflate(R.layout.calendar_page, null);
 
-        ((ViewPager) collection).addView(view, 0);
+        ((ViewPager) collection).addView(view,0 );
 
         return view;
     }
@@ -66,7 +57,8 @@ public class ViewPagerAdapter extends PagerAdapter
     @Override
     public void destroyItem( View pager, int position, Object view )
     {
-        ((ViewPager)pager).removeView( (TextView)view );
+    	
+//        ((ViewPager)pager).removeView( (TextView)view );
     }
  
     @Override

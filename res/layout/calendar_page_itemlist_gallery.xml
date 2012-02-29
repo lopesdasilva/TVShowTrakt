@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="200dp"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="200dp"
+        android:layout_height="120dp" >
+
+        <ImageView
+            android:id="@+id/imageViewEpisode"
+            android:layout_width="200dp"
+            android:contentDescription="@string/show"
+            android:layout_height="279dp"
+            android:src="@drawable/placeholder" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="fill_parent"
+            android:layout_height="75dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="#80000000"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewShowName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/show"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white"
+                android:textColorHighlight="@android:color/white" />
+
+            <TextView
+                android:id="@+id/textViewEpisodeName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nextepisode"
+                android:textColor="@android:color/white"
+                android:textColorHighlight="@android:color/white" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
