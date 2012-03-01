@@ -24,10 +24,14 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.ContextMenu;
+import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 /**
  * Actividade que Ž iniciada quando Ž carregado em calend‡rio
@@ -195,4 +199,16 @@ public class CalendarActivity extends GDActivity {
 				.setPositiveButton("OK", null).show();
 	}
 
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+
+		AdapterContextMenuInfo cmi = (AdapterContextMenuInfo) menuInfo;
+		menu.setHeaderTitle("Context Menu");
+			menu.add(1, cmi.position, 0, "Mark as seen");
+	
+	}
+	
 }
