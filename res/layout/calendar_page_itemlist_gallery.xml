@@ -9,8 +9,7 @@
             android:id="@+id/imageViewEpisode"
             android:layout_width="200dp"
             android:layout_height="120dp"
-            android:contentDescription="@string/show"
-            android:src="@drawable/placeholder" />
+            android:contentDescription="@string/show"/>
 
         <LinearLayout android:id="@+id/linearLayout2" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true" android:background="#80000000" android:orientation="vertical">
             <TextView android:id="@+id/textViewShowName" android:layout_width="fill_parent" android:layout_height="21dp" android:text="@string/show" android:textAppearance="?android:attr/textAppearanceMedium" android:textColor="@android:color/white" android:textColorHighlight="@android:color/white" android:textStyle="bold"/>
@@ -26,7 +25,16 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:visibility="invisible"
             android:src="@drawable/seen" />
+
+        <ProgressBar
+            android:id="@+id/progressBarEpisode"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
 
     </RelativeLayout>
 

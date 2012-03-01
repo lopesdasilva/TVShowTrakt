@@ -88,13 +88,15 @@ public class LazyAdapterListCalendar extends BaseAdapter {
 		galleryEpisodesAdapter = new LazyAdapterGalleryEpisodes(activity,
 				mFanArt, mName, mEpisode, mNumber, mWatched);
 		mGalleryEpisodes = (Gallery) vi.findViewById(R.id.galleryEpisodes);
-		activity.registerForContextMenu(mGalleryEpisodes);
+		
+		
 		// para a galleria ficar alinhada a esquerda
 		mlp = (MarginLayoutParams) mGalleryEpisodes
 				.getLayoutParams();
 		mlp.setMargins(-(metrics.widthPixels / 2), mlp.topMargin,
 				mlp.rightMargin, mlp.bottomMargin);
-		mGalleryEpisodes.setTag(calendarDate.get(position).date.toString());
+	
+		activity.registerForContextMenu(mGalleryEpisodes);
 		mGalleryEpisodes.setAdapter(galleryEpisodesAdapter);
 
 

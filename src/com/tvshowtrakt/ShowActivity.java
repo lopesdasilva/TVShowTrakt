@@ -3,8 +3,8 @@ package com.tvshowtrakt;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import imageloaders.ImageLoaderMedium;
 
+import com.androidquery.AQuery;
 import com.jakewharton.trakt.ServiceManager;
 import com.jakewharton.trakt.entities.TvShow;
 import com.jakewharton.trakt.entities.TvShowSeason;
@@ -43,6 +43,7 @@ public class ShowActivity extends GDActivity {
 	private LinearLayout mLoading;
 	public ListView mListSeasons;
 	public Activity showActivity;
+	private AQuery aq;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -55,19 +56,18 @@ public class ShowActivity extends GDActivity {
 		setTitle(show.title);
 		
 		showActivity = this;
-		
+		aq= new AQuery(this);
 		// Obter as preferências da aplicação
 		getPrefs();
 
-		ImageLoaderMedium imageLoader = new ImageLoaderMedium(
-				this.getApplicationContext());
+	
 		
 		
 		mFanart = (ImageView) findViewById(R.id.imageViewFanArt);
 		mPoster = (ImageView) findViewById(R.id.imageViewPoster);
 
-		imageLoader.DisplayImage(show.images.poster, this, mPoster);
-		imageLoader.DisplayImage(show.images.fanart, this, mFanart);
+		aq.id(R.id.imageViewFanArt).image(show.images.fanart,true,true,200,0);
+		aq.id(R.id.imageViewPoster).image(show.images.poster,true,true,90,0);
 
 		mAdapter = new ViewPagerAdapterSeasons(getApplicationContext());
 		//

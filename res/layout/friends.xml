@@ -4,4 +4,11 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <ListView
+        android:id="@+id/friendsList"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+        <!-- Preview: listitem=@layout/friends_itemlist -->
+    </ListView>
+
 </LinearLayout>

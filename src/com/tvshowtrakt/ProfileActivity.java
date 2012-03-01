@@ -1,21 +1,20 @@
 package com.tvshowtrakt;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.jakewharton.trakt.ServiceManager;
 import com.jakewharton.trakt.entities.TvShow;
-import com.tvshowtrakt.adapters.LazyAdapterGalleryTrending;
+import com.jakewharton.trakt.entities.TvShowSeason;
+import com.jakewharton.trakt.entities.UserProfile;
 
 import greendroid.app.GDActivity;
 import greendroid.widget.ActionBarItem;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.widget.Gallery;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -29,7 +28,9 @@ public class ProfileActivity extends GDActivity {
 	private ProfileActivity profileActivity;
 	private String apikey = "a7b42c4fb5c50a85c68731b25cc3c1ed";
 	
-	 
+	LinearLayout layout;
+	ProgressBar loading;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,9 +43,27 @@ public class ProfileActivity extends GDActivity {
 		
 		//Obter as preferências da aplicação
 				getPrefs();
-				new Watched().execute();
+				
+				layout = (LinearLayout) findViewById(R.id.linearLayout10);
+				layout.setVisibility(LinearLayout.INVISIBLE);
+				loading = (ProgressBar) findViewById(R.id.progressBar1);
+				loading.setVisibility(ProgressBar.VISIBLE);
+				
+
+				
+				
+				
+			
+				new Profile().execute();
+				
 				new Loved().execute();
+				
 				new Collected().execute();
+				
+				
+				
+
+
 				
 	}
 	
@@ -59,6 +78,8 @@ public class ProfileActivity extends GDActivity {
 
 		username = prefs.getString("username", "username");
 		password = prefs.getString("password", "password");
+		
+		
 	}
 
 	/**
@@ -76,15 +97,14 @@ public class ProfileActivity extends GDActivity {
 	}
 	
 	//Asynctask para obtenção dos Shows visualizados.
-	private class Watched extends
-			AsyncTask<String, Void, List<TvShow>> {
+	private class Profile extends
+			AsyncTask<String, Void, UserProfile> {
 		private Exception e = null;
 
 		/**
 		 * primeiro método a correr, usar o manager para obter os dados da api
 		 */
-		@Override
-		protected List<TvShow> doInBackground(String... params) {
+		protected UserProfile doInBackground(String... params) {
 
 			try {
 
@@ -92,7 +112,7 @@ public class ProfileActivity extends GDActivity {
 				manager.setAuthentication(username,
 						new Password().parseSHA1Password(password));
 				manager.setApiKey(apikey);
-				return manager.userService().libraryShowsWatched(username).fire();
+				return manager.userService().profile(username).fire();
 				
 				
 				
@@ -105,17 +125,19 @@ public class ProfileActivity extends GDActivity {
 		/**
 		 * Os resultados são passados para aqui e depois tratados aqui.
 		 */
-		protected void onPostExecute(List<TvShow> result) {
+		protected void onPostExecute(UserProfile profile) {
 			if (e == null) {
+						
+				TextView textview_username = (TextView) findViewById(R.id.textViewUsername);
+				textview_username.setText(username);
+				TextView textview_location = (TextView) findViewById(R.id.textViewLocation);
+				textview_location.setText(profile.gender.name() + " from " + profile.location);
+				TextView textview_watched_episodes = (TextView) findViewById(R.id.TextViewEpisodesWatched);
+				textview_watched_episodes.setText(profile.stats.episodes.watched+"");	
+				TextView textview_watched_shows = (TextView) findViewById(R.id.TextViewShowsWatched);
+				textview_watched_shows.setText(profile.stats.shows.library+"");
 				
-				TextView showswatched = (TextView) findViewById(R.id.showswatched);
-				showswatched.setText(result.size()+"");
-				int watched_episodes =0;
-//				for(TvShow ts: result){
-//					watched_episodes = watched_episodes + ts.episodes.size();
-//				}
-//				TextView episodeswatched = (TextView) findViewById(R.id.episodeswatched);
-//				episodeswatched.setText(watched_episodes+"");
+				
 				
 			} else
 				goBlooey(e);
@@ -172,12 +194,9 @@ public class ProfileActivity extends GDActivity {
 				TextView showsloved = (TextView) findViewById(R.id.showsloved);
 				showsloved.setText(result.size()+"");
 				int watched_episodes =0;
-//				for(TvShow ts: result){
-//					watched_episodes = watched_episodes + ts.episodes.size();
-//				}
-//				TextView episodeswatched = (TextView) findViewById(R.id.episodeswatched);
-//				episodeswatched.setText(watched_episodes+"");
-				
+				TextView episodesloved = (TextView) findViewById(R.id.episodesloved);
+				episodesloved.setText(watched_episodes+ "");
+
 			} else
 				goBlooey(e);
 		}
@@ -233,12 +252,22 @@ public class ProfileActivity extends GDActivity {
 					TextView showscollected = (TextView) findViewById(R.id.showscollected);
 					showscollected.setText(result.size()+"");
 					int watched_episodes =0;
-//					for(TvShow ts: result){
-//						watched_episodes = watched_episodes + ts.episodes.size();
-//					}
-//					TextView episodeswatched = (TextView) findViewById(R.id.episodeswatched);
-//					episodeswatched.setText(watched_episodes+"");
-					
+					for(TvShow show : result){
+						 
+						 for (TvShowSeason  season : show.seasons){
+						 
+						
+						 for(int number: season.episodes.numbers){
+							 watched_episodes++;
+						 
+						 }
+						 }
+						}
+					TextView episodescollected = (TextView) findViewById(R.id.episodescollected);
+					episodescollected.setText(watched_episodes+ "");
+					layout.setVisibility(LinearLayout.VISIBLE);
+					loading.setVisibility(ProgressBar.INVISIBLE);
+
 				} else
 					goBlooey(e);
 			}

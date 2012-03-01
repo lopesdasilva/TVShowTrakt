@@ -30,6 +30,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
@@ -50,7 +51,8 @@ public class CalendarActivity extends GDActivity {
 	public boolean[] tSeen;
 	Gallery mGalleryEpisodes;
 	public LazyAdapterGalleryEpisodes galleryEpisodesAdapter;
-
+	public ListView l;
+	public ProgressBar progress;
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -82,6 +84,10 @@ public class CalendarActivity extends GDActivity {
 		switch (i) {
 		case 0:
 			// mPager.setVisibility(CalendarViewPager.INVISIBLE);
+			l = (ListView) findViewById(R.id.listViewCalendar_last);
+			progress = (ProgressBar) findViewById(R.id.progressBarCalendar_last);
+//			progress.setVisibility(ProgressBar.VISIBLE);
+//			l.setVisibility(ListView.INVISIBLE);
 			new downloadCalendarInfo().execute("0");
 			break;
 		case 1:
@@ -170,7 +176,7 @@ public class CalendarActivity extends GDActivity {
 			if (e == null) {
 				LazyAdapterListCalendar lazyAdapter = new LazyAdapterListCalendar(
 						calendarActivity, result);
-				ListView l = null;
+				
 				switch (page) {
 				case 0:
 					l = (ListView) findViewById(R.id.listViewCalendar_last);
@@ -185,7 +191,9 @@ public class CalendarActivity extends GDActivity {
 
 				l.setAdapter(lazyAdapter);
 				// mPager.setVisibility(CalendarViewPager.VISIBLE);
-
+//				l.setVisibility(ListView.VISIBLE);
+				progress = (ProgressBar) findViewById(R.id.progressBarCalendar_last);
+				progress.setVisibility(ProgressBar.INVISIBLE);
 			} else
 				goBlooey(e);
 		}
