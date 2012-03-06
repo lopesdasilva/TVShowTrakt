@@ -12,7 +12,8 @@
         android:text="@string/tvshowname"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColorHighlight="@android:color/white"
-        android:textColorLink="@android:color/white" />
+        android:textColorLink="@android:color/white" 
+        android:textColor="@android:color/white"/>
 
     <LinearLayout
         android:id="@+id/linearLayout1"

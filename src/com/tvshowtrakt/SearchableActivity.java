@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import greendroid.app.GDActivity;
 import greendroid.widget.ActionBarItem;
@@ -74,12 +75,10 @@ public class SearchableActivity extends GDActivity {
 	}
 
 	private void doMySearch(String query) {
-		
-		
+
 		searchResults.setVisibility(ListView.GONE);
 		mUpdating.setVisibility(LinearLayout.VISIBLE);
 		new Searching().execute(query);
-
 
 	}
 
@@ -129,8 +128,7 @@ public class SearchableActivity extends GDActivity {
 		 * the result from doInBackground()
 		 */
 		protected void onPostExecute(ArrayList<TvShow> result) {
-			
-			
+
 			if (e == null) {
 
 				String[] mTitle = new String[result.size()];
@@ -158,9 +156,9 @@ public class SearchableActivity extends GDActivity {
 					i++;
 				}
 
-				LazyAdapterListSearch lazyAdapter = new LazyAdapterListSearch(searchableActivitity,
-						mPosters, mTitle, mSeen, mLovedPercentage, mVotes,
-						mDescription);
+				LazyAdapterListSearch lazyAdapter = new LazyAdapterListSearch(
+						searchableActivitity, mPosters, mTitle, mSeen,
+						mLovedPercentage, mVotes, mDescription);
 				searchResults.setAdapter(lazyAdapter);
 
 				searchResults.setVisibility(ListView.VISIBLE);
@@ -180,4 +178,26 @@ public class SearchableActivity extends GDActivity {
 				.setPositiveButton("OK", null).show();
 	}
 
+	/**
+	 * Metodo para definir as acções da ActionBar
+	 */
+	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
+		switch (item.getItemId()) {
+		
+		
+		case SEARCH:
+
+			this.startSearch(null, false, Bundle.EMPTY, false);
+			break;
+		case SETTINGS:
+			Toast.makeText(getApplicationContext(), "Settings",
+					Toast.LENGTH_SHORT).show();
+			break;
+
+		default:
+			return super.onHandleActionBarItemClick(item, position);
+
+		}
+		return true;
+	}
 }

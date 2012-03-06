@@ -64,15 +64,6 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/placeholder" />
 
-            <TextView
-                android:id="@+id/textView_nextepisode"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:background="#80000000"
-                android:text="@string/nextepisode" />
-
             <ImageView
                 android:id="@+id/imageViewSeen"
                 android:layout_width="50dp"
@@ -88,54 +79,102 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/lovetag" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="#80000000"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right" >
+
+                    <TextView
+                        android:id="@+id/textViewPercentagedLove"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:paddingRight="5dp"
+                        android:text="@string/percentage"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:src="@drawable/icon_love" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewVotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/votes"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/relativeLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+    android:id="@+id/relativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
 
-        <LinearLayout
-            android:id="@+id/loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" >
 
-            <ProgressBar
-                android:id="@+id/progressBarLoading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+    <LinearLayout
+    android:id="@+id/loading"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true" >
 
-            <TextView
-                android:id="@+id/textViewLoading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:text="@string/loadingshow"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-        </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/showInfo"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+    <ProgressBar
+    android:id="@+id/progressBarLoading"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
 
-            <com.viewpagerindicator.TitlePageIndicator
-                android:id="@+id/indicator"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dip"
-                style="@style/Widget.MyTitlepageIndicator" />
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/pager"
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-        </LinearLayout>
+    <TextView
+    android:id="@+id/textViewLoading"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:layout_marginLeft="10dp"
+    android:text="@string/loadingshow"
+    android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+
+
+    <LinearLayout
+    android:id="@+id/showInfo"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+
+    <com.viewpagerindicator.TitlePageIndicator
+    android:id="@+id/indicator"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dip"
+    style="@style/Widget.MyTitlepageIndicator" />
+
+
+    <android.support.v4.view.ViewPager
+    android:id="@+id/pager"
+    android:layout_width="fill_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1" />
+    </LinearLayout>
     </RelativeLayout>
 
 </LinearLayout>

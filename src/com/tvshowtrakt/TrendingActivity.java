@@ -9,6 +9,7 @@ import com.jakewharton.trakt.entities.UserProfile.Stats.Shows;
 import com.tvshowtrakt.adapters.LazyAdapterListTrending;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -173,6 +174,19 @@ public class TrendingActivity extends GDActivity {
 
 				mUpdating.setVisibility(LinearLayout.GONE);
 				mTrendingList.setVisibility(ListView.VISIBLE);
+				mTrendingList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View arg1,
+							int position, long arg3) {
+
+						Intent i = new Intent(getApplicationContext(),
+								ShowActivity.class);
+						i.putExtra("Show", trendingList.get(position));
+						startActivity(i);
+
+					}
+				});
 
 			} else
 				goBlooey(e);
@@ -254,5 +268,27 @@ public class TrendingActivity extends GDActivity {
 		mTrendingList.setVisibility(ListView.GONE);
 		new downloadTrending().execute();
 
+	}
+	
+	/**
+	 * Metodo para definir as acções da ActionBar
+	 */
+	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
+		switch (item.getItemId()) {
+
+		case REFRESH:
+			Toast.makeText(getApplicationContext(), "Updating TrendingList",
+					Toast.LENGTH_SHORT).show();
+			updateTrending();
+			break;
+
+		case SEARCH:
+			this.startSearch(null, false, Bundle.EMPTY, false);
+			break;
+		default:
+			return super.onHandleActionBarItemClick(item, position);
+
+		}
+		return true;
 	}
 }

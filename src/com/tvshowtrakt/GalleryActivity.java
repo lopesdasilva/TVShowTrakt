@@ -13,7 +13,9 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.AdapterView;
 import android.widget.Gallery;
 import android.widget.ProgressBar;
@@ -252,8 +254,19 @@ public class GalleryActivity extends GDActivity {
 					tTitle[i] = t.title + " (" + t.year + ")";
 					i++;
 				}
+				
+				DisplayMetrics metrics = new DisplayMetrics();
+				galleryActivity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+				// para a galleria ficar alinhada a esquerda
+			
+				
+				
 				galleryTrendingAdapter = new LazyAdapterGalleryTrending(
 						galleryActivity, tPosters, tTitle, tSeen);
+				
+				MarginLayoutParams mlp = (MarginLayoutParams) mGalleryTrending.getLayoutParams();
+				mlp.setMargins(-(metrics.widthPixels / 2 + 100), mlp.topMargin,
+						mlp.rightMargin, mlp.bottomMargin);
 				mGalleryTrending.setAdapter(galleryTrendingAdapter);
 
 				mProgressBarTrending.setVisibility(ProgressBar.GONE);

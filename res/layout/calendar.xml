@@ -4,19 +4,47 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bglinen" >
 
-        <com.viewpagerindicator.TitlePageIndicator
-            android:id="@+id/indicator"
-            android:layout_width="fill_parent"
+        <TextView
+            android:id="@+id/textViewLastWeek"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dip" 
-            style="@style/Widget.MyTitlepageIndicator"/>
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="Last week"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#008FBB"
+            android:textColorHighlight="#d1e751" />
 
-        <views.CalendarViewPager
-            android:id="@+id/pager"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-             />
+        <TextView
+            android:id="@+id/textViewThisWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:clickable="true"
+            android:text="This week"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#008FBB"
+            android:textColorHighlight="#d1e751" />
+
+        <TextView
+            android:id="@+id/textViewNextWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="Next week"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#008FBB"
+            android:textColorHighlight="#d1e751" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/calendar_page_last" />
 
 </LinearLayout>

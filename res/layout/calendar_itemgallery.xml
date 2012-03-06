@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout2"
+    android:layout_width="200dp"
+    android:layout_height="100dp"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="200dp"
+        android:layout_height="100dp" >
+
+        <ImageView
+            android:id="@+id/imageViewEpisode"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="#80000000"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textViewShowTitle"
+                android:layout_width="150dp"
+                android:layout_height="20dp"
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white"
+                android:textColorHighlight="@android:color/white"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/textViewEpisodeNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textColor="#008FBB"
+                    android:textColorHighlight="#008FBB"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewEpisodeTitle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="20dp"
+                    android:text="TextView"
+                    android:paddingLeft="2dp"
+                    android:textColor="@android:color/white"
+                    android:textColorHighlight="@android:color/secondary_text_light" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageViewSeenTag"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/seen"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+</LinearLayout>

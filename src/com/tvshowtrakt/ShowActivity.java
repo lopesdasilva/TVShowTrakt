@@ -16,6 +16,7 @@ import greendroid.app.GDActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -66,8 +67,12 @@ public class ShowActivity extends GDActivity {
 		mFanart = (ImageView) findViewById(R.id.imageViewFanArt);
 		mPoster = (ImageView) findViewById(R.id.imageViewPoster);
 
-		aq.id(R.id.imageViewFanArt).image(show.images.fanart,true,true,200,0);
-		aq.id(R.id.imageViewPoster).image(show.images.poster,true,true,90,0);
+		Bitmap poster = aq.getCachedImage(R.drawable.poster);
+		Bitmap placeholder =aq.getCachedImage(R.drawable.placeholder);
+		aq.id(R.id.imageViewFanArt).image(show.images.fanart,true,true,200,0,placeholder,AQuery.FADE_IN);
+		aq.id(R.id.imageViewPoster).image(show.images.poster,true,true,90,0,poster,AQuery.FADE_IN);
+		aq.id(R.id.textViewPercentagedLove).text(show.ratings.percentage+" %");
+		aq.id(R.id.textViewVotes).text(show.ratings.votes+" votes");
 
 		mAdapter = new ViewPagerAdapterSeasons(getApplicationContext());
 		//

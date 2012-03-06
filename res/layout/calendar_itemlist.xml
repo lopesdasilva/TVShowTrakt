@@ -4,21 +4,30 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textViewDate"
+    <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#FBFBFB"
-        android:text="@string/date"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/black" />
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black"
+            android:textColorHighlight="@android:color/black" />
+
+    </LinearLayout>
 
     <Gallery
-        android:id="@+id/galleryEpisodes"
+        android:id="@+id/galleryCalendar"
         android:layout_width="fill_parent"
-        android:layout_height="120dp"
-        android:paddingLeft="40dp" 
-        android:background="#E8E8DC"
-        android:spacing="0dp"/>
+        android:layout_height="wrap_content" 
+         android:paddingLeft="40dp" 
+         android:spacing="2dp"
+        android:background="#E8E8DC"/>
 
 </LinearLayout>
