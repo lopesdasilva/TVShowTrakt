@@ -4,11 +4,13 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+    <GridView
+        android:id="@+id/gridViewLibrary"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/library"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:numColumns="3" >
+        <!-- Preview: listitem=@layout/library_itemlist -->
+    </GridView>
+
 
 </LinearLayout>

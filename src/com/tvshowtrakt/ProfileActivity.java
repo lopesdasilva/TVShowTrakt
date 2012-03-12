@@ -2,6 +2,7 @@ package com.tvshowtrakt;
 
 import java.util.List;
 
+import com.androidquery.AQuery;
 import com.jakewharton.trakt.ServiceManager;
 import com.jakewharton.trakt.entities.TvShow;
 import com.jakewharton.trakt.entities.TvShowSeason;
@@ -10,6 +11,7 @@ import com.jakewharton.trakt.entities.UserProfile;
 import greendroid.app.GDActivity;
 import greendroid.widget.ActionBarItem;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,9 +29,12 @@ public class ProfileActivity extends GDActivity {
 	private static final int SEARCH = 0;
 	private ProfileActivity profileActivity;
 	private String apikey = "a7b42c4fb5c50a85c68731b25cc3c1ed";
+	private ProgressDialog pg;
+	AQuery aq;
+	////ADASASDASd
 	
-	LinearLayout layout;
-	ProgressBar loading;
+	
+	int sem = 0;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,32 +46,28 @@ public class ProfileActivity extends GDActivity {
 		//Items da ActionBar
 		addActionBarItem(ActionBarItem.Type.Search, SEARCH);
 		
+		
+		aq = new AQuery(this);
+		
+		
 		//Obter as preferências da aplicação
 				getPrefs();
-				
-				layout = (LinearLayout) findViewById(R.id.linearLayout10);
-				layout.setVisibility(LinearLayout.INVISIBLE);
-				loading = (ProgressBar) findViewById(R.id.progressBar1);
-				loading.setVisibility(ProgressBar.VISIBLE);
-				
-
-				
-				
-				
-			
-				new Profile().execute();
-				
-				new Loved().execute();
-				
-				new Collected().execute();
-				
-				
-				
-
+				updateProfile();
 
 				
 	}
 	
+	private void updateProfile() {
+		pg=ProgressDialog.show(this, "Please Wait", "Loading Contents",true,true);
+		aq.id(R.id.MainLayout).invisible();
+		new Profile().execute();
+		
+		
+		
+	
+		
+	}
+
 	/**
 	 * Metodo para obter as preferencias da applicação
 	 */
@@ -128,6 +129,9 @@ public class ProfileActivity extends GDActivity {
 		protected void onPostExecute(UserProfile profile) {
 			if (e == null) {
 						
+				aq.id(R.id.imageViewPhoto).image(profile.avatar);
+				
+				
 				TextView textview_username = (TextView) findViewById(R.id.textViewUsername);
 				textview_username.setText(username);
 				TextView textview_location = (TextView) findViewById(R.id.textViewLocation);
@@ -135,9 +139,14 @@ public class ProfileActivity extends GDActivity {
 				TextView textview_watched_episodes = (TextView) findViewById(R.id.TextViewEpisodesWatched);
 				textview_watched_episodes.setText(profile.stats.episodes.watched+"");	
 				TextView textview_watched_shows = (TextView) findViewById(R.id.TextViewShowsWatched);
-				textview_watched_shows.setText(profile.stats.shows.library+"");
+				textview_watched_shows.setText(profile.stats.shows.library+"");				
 				
-				
+				new Loved().execute();
+				sem++;
+				if(sem==3){
+					pg.dismiss();
+					aq.id(R.id.MainLayout).visible();
+				}
 				
 			} else
 				goBlooey(e);
@@ -196,7 +205,14 @@ public class ProfileActivity extends GDActivity {
 				int watched_episodes =0;
 				TextView episodesloved = (TextView) findViewById(R.id.episodesloved);
 				episodesloved.setText(watched_episodes+ "");
-
+				
+				new Collected().execute();
+				sem++;
+				if(sem==3){
+				pg.dismiss();
+				aq.id(R.id.MainLayout).visible();
+				
+				}
 			} else
 				goBlooey(e);
 		}
@@ -265,9 +281,11 @@ public class ProfileActivity extends GDActivity {
 						}
 					TextView episodescollected = (TextView) findViewById(R.id.episodescollected);
 					episodescollected.setText(watched_episodes+ "");
-					layout.setVisibility(LinearLayout.VISIBLE);
-					loading.setVisibility(ProgressBar.INVISIBLE);
-
+					sem++;
+					if(sem==3){
+						pg.dismiss();
+						aq.id(R.id.MainLayout).visible();
+					}
 				} else
 					goBlooey(e);
 			}
