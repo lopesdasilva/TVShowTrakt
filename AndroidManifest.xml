@@ -56,6 +56,7 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".RecommendedActivity" />
         <activity android:name=".SeenActivity" />
+        <activity android:name=".SeasonActivity" />
         <activity android:name=".WatchlistActivity" />
         <activity android:name=".TrendingActivity" >
             <meta-data

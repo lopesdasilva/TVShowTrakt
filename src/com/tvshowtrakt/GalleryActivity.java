@@ -219,7 +219,7 @@ public class GalleryActivity extends GDActivity {
 				List<TvShow> mlist = manager.showService().trending().fire();
 				ArrayList<TvShow> d = new ArrayList<TvShow>();
 				// TODO URGENTE isto Ž para melhorar (passar como return)
-				mlist = mlist.subList(0, 10);
+				mlist = mlist.subList(0, 15);
 				trendingList = mlist;
 
 				for (TvShow c : mlist) {
