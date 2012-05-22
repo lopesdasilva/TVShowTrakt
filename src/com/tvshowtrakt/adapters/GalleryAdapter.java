@@ -60,32 +60,20 @@ public class GalleryAdapter extends BaseAdapter {
 				tv.setText("Library");
 				break;
 			case 2:
-				iv.setImageResource(R.drawable.icon_seen);
-				tv.setText("Seen");
-				break;
-			case 3:
-				iv.setImageResource(R.drawable.icon_friends);
-				tv.setText("Friends");
-				break;
-			case 4:
-				iv.setImageResource(R.drawable.icon_watchlist);
-				tv.setText("Watchlist");
-				break;
-			case 5:
-				iv.setImageResource(R.drawable.icon_history);
-				tv.setText("History");
-				break;
-			case 6:
-				iv.setImageResource(R.drawable.icon_profile);
-				tv.setText("Profile");
-				break;
-			case 7:
 				iv.setImageResource(R.drawable.icon_recommendations);
 				tv.setText("Recommended");
 				break;
-			case 8:
-				iv.setImageResource(R.drawable.iconrecommendations);
-				tv.setText("My Shows");
+			case 3:
+				iv.setImageResource(R.drawable.icon_watchlist);
+				tv.setText("Watchlist");
+				break;
+			case 4:
+				iv.setImageResource(R.drawable.icon_friends);
+				tv.setText("Friends");
+				break;
+			case 5:
+				iv.setImageResource(R.drawable.icon_profile);
+				tv.setText("Profile");
 				break;
 			}
 		}

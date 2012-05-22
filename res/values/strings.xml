@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">TVShowTrakt</string>
-    <string name="calendar">Calendar Acrecsentar o View Pager Aqui</string>
+    <string name="app_name">TV trakt</string>
+    <string name="calendar">Calendar</string>
     <string name="friends">Friends</string>
     <string name="history">History</string>
     <string name="library">Library</string>
@@ -35,7 +35,7 @@
     <string name="certification_text">certification</string>
     <string name="premiered_text">premiered</string>
     <string name="loadingshow">Loading Show</string>
-    <string name="nextepisode">Next Episode: 2x04 Empty Hands\nOn February 17, 2012</string>
+    <string name="nextepisode">Next Episode: 2x04 Episode Name\nOn February 17, 2012</string>
     <string name="episodeTitle">Empty Hands</string>
     <string name="nextepisode1"></string>
     <string name="username">username</string>
@@ -48,6 +48,11 @@
     <string name="season">Season 0</string>
     <string name="date">Thursday March 1, 2012</string>
     <string name="epsiodenumber">2x1</string>
+    <string name="watched">watched</string>
+    <string name="friendsupto">See what your friends are up to...</string>
+    <string name="youhave">You have</string>
+    <string name="numFriends">##</string>
+    <string name="friends2">friends</string>
         
         
 </resources>

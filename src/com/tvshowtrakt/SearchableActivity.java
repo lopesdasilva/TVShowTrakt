@@ -6,6 +6,8 @@ import com.jakewharton.trakt.ServiceManager;
 import com.jakewharton.trakt.entities.TvShow;
 import com.tvshowtrakt.adapters.LazyAdapterListSearch;
 
+import extras.Blooye;
+
 import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Intent;
@@ -28,8 +30,7 @@ public class SearchableActivity extends GDActivity {
 	String username;
 	String password;
 	String apikey = "a7b42c4fb5c50a85c68731b25cc3c1ed";
-	private static final int SEARCH = 0;
-	private static final int SETTINGS = 1;
+	private static final int SEARCH = 1;
 
 	ListView searchResults;
 	private LinearLayout mUpdating;
@@ -43,7 +44,6 @@ public class SearchableActivity extends GDActivity {
 		// TODO SEARCHLIST WITH COVERS
 		setActionBarContentView(R.layout.search);
 		addActionBarItem(ActionBarItem.Type.Search, SEARCH);
-		addActionBarItem(ActionBarItem.Type.Settings, SETTINGS);
 		setTitle("Search Results");
 
 		getPrefs();
@@ -165,17 +165,12 @@ public class SearchableActivity extends GDActivity {
 
 				mUpdating.setVisibility(LinearLayout.GONE);
 			} else
-				goBlooey(e);
+				/**
+				 * Em caso de erro a excepção será tratada aqui.
+				 */
+				Blooye.goBlooey(searchableActivitity, e);
 		}
 
-	}
-
-	private void goBlooey(Throwable t) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-		builder.setTitle("Connection Error")
-				.setMessage("Movie Trakt can not connect with trakt service")
-				.setPositiveButton("OK", null).show();
 	}
 
 	/**
@@ -183,15 +178,10 @@ public class SearchableActivity extends GDActivity {
 	 */
 	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
 		switch (item.getItemId()) {
-		
-		
+
 		case SEARCH:
 
 			this.startSearch(null, false, Bundle.EMPTY, false);
-			break;
-		case SETTINGS:
-			Toast.makeText(getApplicationContext(), "Settings",
-					Toast.LENGTH_SHORT).show();
 			break;
 
 		default:
@@ -199,5 +189,13 @@ public class SearchableActivity extends GDActivity {
 
 		}
 		return true;
+	}
+	
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);      
+		String query = intent.getStringExtra(SearchManager.QUERY);
+		doMySearch(query);
+
 	}
 }

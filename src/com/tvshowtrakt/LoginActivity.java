@@ -4,6 +4,8 @@ import com.jakewharton.apibuilder.ApiException;
 import com.jakewharton.trakt.ServiceManager;
 import com.jakewharton.trakt.entities.Response;
 
+import extras.Blooye;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -29,10 +31,14 @@ public class LoginActivity extends Activity {
 	private ImageView mSignin;
 	private ProgressBar mProgressBar;
 
+	public LoginActivity loginActivity;
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 
+		
+		loginActivity=this;
 		// Variaveis de elementos do layout a ser usados
 		mUsername = (EditText) findViewById(R.id.username);
 		mPassword = (EditText) findViewById(R.id.password);
@@ -107,24 +113,13 @@ public class LoginActivity extends Activity {
 
 			} else {
 
-				goBlooey(e);
+				/**
+				 * Em caso de erro a excepção será tratada aqui.
+				 */
+				Blooye.goBlooeyLogin(loginActivity,e);
 			}
 
 		}
-
-	}
-
-	private void goBlooey(Throwable t) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		if (t.getMessage().equals("wrong pass"))
-			builder.setTitle("Error found")
-					.setMessage("Invalid login information")
-					.setPositiveButton("OK", null).show();
-		else if (t.getClass().equals(ApiException.class))
-			builder.setTitle("Connection Error")
-					.setMessage(
-							"Movie Trakt can not connect with trakt service")
-					.setPositiveButton("OK", null).show();
 
 	}
 

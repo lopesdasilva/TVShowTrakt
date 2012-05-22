@@ -21,7 +21,7 @@
     android:orientation="vertical" >
 
     <LinearLayout
-        android:id="@+id/linearLayout1"
+        android:id="@+id/linearLayoutImages"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
 
@@ -44,6 +44,7 @@
                 android:layout_height="30dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
+                android:scaleType="centerCrop" 
                 android:layout_marginLeft="14dp"
                 android:src="@drawable/icon_watchlist_color"
                 android:visibility="gone" />

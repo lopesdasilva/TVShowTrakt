@@ -2,16 +2,25 @@ package com.tvshowtrakt;
 
 import java.util.List;
 
+import com.androidquery.AQuery;
 import com.jakewharton.trakt.ServiceManager;
 import com.jakewharton.trakt.entities.UserProfile;
 import com.tvshowtrakt.adapters.LazyAdapterListFriends;
 
+import extras.Blooye;
+
 import greendroid.app.GDActivity;
+import greendroid.widget.ActionBarItem;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.View;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 // TODO: Auto-generated Javadoc
@@ -28,6 +37,13 @@ public class FriendsActivity extends GDActivity {
 	private FriendsActivity friendsActivity;
 	public ListView mFriendList;
 	public LazyAdapterListFriends lazyAdapter;
+	
+	private ProgressDialog pg;
+
+	private static final int REFRESH = 0;
+	private static final int SEARCH = 1;
+	
+	AQuery aq ;
 
 	/*
 	 * (non-Javadoc)
@@ -40,13 +56,23 @@ public class FriendsActivity extends GDActivity {
 		setActionBarContentView(R.layout.friends);
 		setTitle("Friends");
 
+		
+		// Items da ActionBar
+		addActionBarItem(ActionBarItem.Type.Refresh2, REFRESH);
+		addActionBarItem(ActionBarItem.Type.Search, SEARCH);
 		friendsActivity=this;
 		
 		mFriendList = (ListView) findViewById(R.id.friendsList);
-		
+		aq = new AQuery(this);
 		getPrefs();
-		new downloadFriendInfo().execute();
+		updateFriends();
+		
 
+	}
+
+	private void updateFriends() {
+		pg=ProgressDialog.show(this, "Please Wait","Loading Friends",true, true);
+		new downloadFriendInfo().execute();
 	}
 
 	private class downloadFriendInfo extends
@@ -73,26 +99,30 @@ public class FriendsActivity extends GDActivity {
 			return null;
 		}
 
-		protected void onPostExecute(List<UserProfile> result) {
+		protected void onPostExecute(final List<UserProfile> result) {
 			if (e == null) {
 				
-
-//				int i = 0;
-//				for (UserProfile userProfile : result) {
-//					nomes[i] = userProfile.username;
-//					localizacao[i] = userProfile.location;
-////					genero[i] = percorre.gender.name();
-//					i++;
-//				}
-
-				lazyAdapter = new LazyAdapterListFriends(friendsActivity,result);
+				aq.id(R.id.textViewNumberOfFriends).text(result.size()+"");
+				lazyAdapter = new LazyAdapterListFriends(friendsActivity,result,aq);
 				mFriendList.setAdapter(lazyAdapter);
+				mFriendList.setOnItemClickListener(new OnItemClickListener() {
 
-//				mFriendList.setVisibility(ListView.VISIBLE);
-				
-				
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View arg1,
+							int arg2, long arg3) {
+						Intent i = new Intent(getApplicationContext(),
+								ProfileActivity.class);
+						i.putExtra("User", result.get(arg2).username);
+						startActivity(i);
+						
+					}
+				});
+				pg.dismiss();
 			} else
-				goBlooey(e);
+				/**
+				 * Em caso de erro a excepção será tratada aqui.
+				 */
+				Blooye.goBlooey(friendsActivity,e);
 
 		}
 
@@ -110,16 +140,25 @@ public class FriendsActivity extends GDActivity {
 		username = prefs.getString("username", "username");
 		password = prefs.getString("password", "password");
 	}
-
+	
 	/**
-	 * Em caso de erro a excepção será tratada aqui.
+	 * Metodo para definir as acções da ActionBar
 	 */
-	private void goBlooey(Throwable t) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(
-				getApplicationContext());
+	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
+		switch (item.getItemId()) {
 
-		builder.setTitle("Connection Error")
-				.setMessage("Movie Trakt can not connect with trakt service")
-				.setPositiveButton("OK", null).show();
+		case REFRESH:
+			updateFriends();
+			break;
+
+		case SEARCH:
+			this.startSearch(null, false, Bundle.EMPTY, false);
+			break;
+		default:
+			return super.onHandleActionBarItemClick(item, position);
+
+		}
+		return true;
 	}
+
 }

@@ -9,7 +9,10 @@ import com.jakewharton.trakt.entities.CalendarDate;
 import com.jakewharton.trakt.entities.CalendarDate.CalendarTvShowEpisode;
 import com.tvshowtrakt.adapters.LazyAdapterListCalendar;
 
+import extras.Blooye;
+
 import greendroid.app.GDActivity;
+import greendroid.widget.ActionBarItem;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
@@ -41,6 +44,9 @@ public class CalendarActivity extends GDActivity {
 	private Date d;
 	public List<CalendarDate> calendarList;
 	public int selectedShow;
+	
+	private static final int REFRESH = 0;
+	private static final int SEARCH = 1;
 
 	/*
 	 * (non-Javadoc)
@@ -55,7 +61,9 @@ public class CalendarActivity extends GDActivity {
 
 		calendarActivity = this;
 		getPrefs();
-
+		// Items da ActionBar
+		addActionBarItem(ActionBarItem.Type.Refresh2, REFRESH);
+		addActionBarItem(ActionBarItem.Type.Search, SEARCH);
 		aq = new AQuery(this);
 		d = new Date();
 		// new downloadCalendarInfo().execute(1);
@@ -137,17 +145,12 @@ public class CalendarActivity extends GDActivity {
 				registerForContextMenu(l);
 				pg.dismiss();
 			} else
-				goBlooey(e);
+				/**
+				 * Em caso de erro a excepção será tratada aqui.
+				 */
+				Blooye.goBlooey(calendarActivity, e);
 		}
 
-	}
-
-	private void goBlooey(Throwable t) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-		builder.setTitle("Connection Error")
-				.setMessage("Movie Trakt can not connect with trakt service")
-				.setPositiveButton("OK", null).show();
 	}
 
 	/**
@@ -206,12 +209,14 @@ public class CalendarActivity extends GDActivity {
 
 	private void markEpisodeSeen(CalendarTvShowEpisode show) {
 		if (show.episode.watched) {
-			Toast.makeText(this, "Marking " + show.show.title + " as unseen.",
-					Toast.LENGTH_SHORT).show();
+			pg = ProgressDialog.show(this, "Please Wait", "Marking "
+					+ show.show.title + " as unseen.");
+
 			new markEpisodeUnSeen().execute(show);
 		} else {
-			Toast.makeText(this, "Marking " + show.show.title + " as seen.",
-					Toast.LENGTH_SHORT).show();
+			pg = ProgressDialog.show(this, "Please Wait", "Marking "
+					+ show.show.title + " as seen.");
+
 			new markEpisodeSeen().execute(show);
 		}
 	}
@@ -243,12 +248,14 @@ public class CalendarActivity extends GDActivity {
 
 		protected void onPostExecute(List<CalendarDate> result) {
 			if (e == null) {
-				Toast.makeText(calendarActivity, "Success", Toast.LENGTH_SHORT)
-						.show();
+				pg.dismiss();
 				updateCurrentWeek();
 
 			} else
-				goBlooey(e);
+				/**
+				 * Em caso de erro a excepção será tratada aqui.
+				 */
+				Blooye.goBlooey(calendarActivity, e);
 		}
 
 	}
@@ -280,13 +287,35 @@ public class CalendarActivity extends GDActivity {
 
 		protected void onPostExecute(List<CalendarDate> result) {
 			if (e == null) {
-				Toast.makeText(calendarActivity, "Success", Toast.LENGTH_SHORT)
-						.show();
+				pg.dismiss();
 				updateCurrentWeek();
 
 			} else
-				goBlooey(e);
+				/**
+				 * Em caso de erro a excepção será tratada aqui.
+				 */
+				Blooye.goBlooey(calendarActivity, e);
 		}
 
+	}
+	
+	/**
+	 * Metodo para definir as acções da ActionBar
+	 */
+	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
+		switch (item.getItemId()) {
+
+		case REFRESH:
+			updateCurrentWeek();
+			break;
+
+		case SEARCH:
+			this.startSearch(null, false, Bundle.EMPTY, false);
+			break;
+		default:
+			return super.onHandleActionBarItemClick(item, position);
+
+		}
+		return true;
 	}
 }

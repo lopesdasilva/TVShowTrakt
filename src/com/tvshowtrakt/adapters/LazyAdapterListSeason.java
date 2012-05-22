@@ -10,6 +10,7 @@ import com.tvshowtrakt.R;
 import com.tvshowtrakt.SeasonActivity;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,26 +51,29 @@ public class LazyAdapterListSeason extends BaseAdapter {
 		View vi = convertView;
 		if (convertView == null)
 			vi = inflater.inflate(R.layout.season_itemlist, null);
-		TvShowEpisode show = showList.get(position);
+		TvShowEpisode episode = showList.get(position);
 		aq = aq.recycle(vi);
-		aq.id(R.id.textViewEpisodeTitle).text(show.title);
-		aq.id(R.id.textViewEpisodeOverview).text(show.overview);
-		aq.id(R.id.textViewEpisodeNumber).text(show.season + "x" + show.number);
+		aq.id(R.id.textViewEpisodeTitle).text(episode.title);
+		aq.id(R.id.textViewEpisodeOverview).text(episode.overview);
+		aq.id(R.id.textViewEpisodeNumber).text(episode.season + "x" + episode.number);
 		aq.id(R.id.textViewEpisodePercentage).text(
-				show.ratings.percentage + " %");
-		aq.id(R.id.textViewEpisodeVotes).text(show.ratings.votes + " votes");
+				episode.ratings.percentage + " %");
+		aq.id(R.id.textViewEpisodeVotes).text(episode.ratings.votes + " votes");
 
 		SimpleDateFormat sdf1 = new SimpleDateFormat("MMM dd, yyyy");
 		Date d= new Date();
-		if (show.firstAired.after(d))
-			aq.id(R.id.textViewEpisodeAirDate).text("airs "+sdf1.format(show.firstAired));
+		if (episode.firstAired.after(d))
+			aq.id(R.id.textViewEpisodeAirDate).text("airs "+sdf1.format(episode.firstAired));
 		else
-			aq.id(R.id.textViewEpisodeAirDate).text("aired "+sdf1.format(show.firstAired));
-		if (show.watched)
+			aq.id(R.id.textViewEpisodeAirDate).text("aired "+sdf1.format(episode.firstAired));
+		Log.d("DEBUG","Checking if the episode is watched "+episode.watched);
+		if (episode.watched)
 			aq.id(R.id.imageViewEpisodeSeen).visible();
+		else
+			aq.id(R.id.imageViewEpisodeSeen).invisible();
 		// if(show.inWatchlist)
 		// aq.id(R.id.imageViewEpisodeInWatchlist).visible();
-		aq.id(R.id.imageViewEpisodeScreen).image(show.images.screen, true,
+		aq.id(R.id.imageViewEpisodeScreen).image(episode.images.screen, true,
 				true, 300, 0);
 
 		return vi;

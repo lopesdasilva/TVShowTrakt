@@ -8,6 +8,8 @@ import com.jakewharton.trakt.entities.TvShow;
 import com.jakewharton.trakt.entities.UserProfile.Stats.Shows;
 import com.tvshowtrakt.adapters.LazyAdapterListTrending;
 
+import extras.Blooye;
+
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -189,7 +191,10 @@ public class TrendingActivity extends GDActivity {
 				});
 
 			} else
-				goBlooey(e);
+				/**
+				 * Em caso de erro a excepção será tratada aqui.
+				 */
+				Blooye.goBlooey(trendingActivity,e);
 		}
 
 	}
@@ -239,19 +244,17 @@ public class TrendingActivity extends GDActivity {
 		 * the result from doInBackground()
 		 */
 		protected void onPostExecute(String result) {
-			if (e != null)
-				goBlooey(e);
+			if (e != null){
+				/**
+				 * Em caso de erro a excepção será tratada aqui.
+				 */
+				Blooye.goBlooey(trendingActivity,e);
+			}
 			updateTrending();
 		}
 	}
 
-	private void goBlooey(Throwable t) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-		builder.setTitle("Connection Error")
-				.setMessage("Movie Trakt can not connect with trakt service")
-				.setPositiveButton("OK", null).show();
-	}
+	
 
 	private void getPrefs() {
 		// Get the xml/preferences.xml preferences

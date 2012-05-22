@@ -7,15 +7,13 @@
     <GridView
         android:id="@+id/gridview"
         android:layout_width="fill_parent"
-        android:layout_height="230dp"
+        android:layout_height="164dp"
         android:background="@drawable/bglinen"
         android:gravity="center_horizontal"
         android:horizontalSpacing="1dp"
         android:numColumns="3"
-        android:paddingTop="10dp"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="30dp" >
-
+        android:verticalSpacing="20dp" >
         <!-- Preview: listitem=@layout/grid_item -->
     </GridView>
 
@@ -108,26 +106,29 @@
             <Button
                 android:id="@+id/handle"
                 android:layout_width="fill_parent"
-                android:layout_height="40dp"
-                android:background="#008FBB"
-                android:text="@string/friendsupto"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@android:color/white" />
+                android:layout_height="30dp"
+                android:text="@string/friendsupto" 
+                android:textColor="@android:color/white"
+                android:background="#008FBB"/>
 
             <LinearLayout
                 android:id="@+id/content"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:background="@android:color/black"
-                android:orientation="vertical" >
+                android:orientation="vertical" 
+                android:background="@android:color/black">
 
                 <ListView
                     android:id="@+id/listViewFriendsHistory"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content" >
                 </ListView>
+
+               
+
             </LinearLayout>
         </SlidingDrawer>
+
     </FrameLayout>
 
 </LinearLayout>

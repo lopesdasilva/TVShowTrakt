@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.androidquery.AQuery;
 import com.jakewharton.trakt.entities.UserProfile;
 import com.tvshowtrakt.FriendsActivity;
 import com.tvshowtrakt.R;
@@ -21,11 +22,13 @@ public class LazyAdapterListFriends extends BaseAdapter {
 	private static LayoutInflater inflater = null;
 	public ImageLoader imageLoader;
 	private List<UserProfile> userProfile;
+	private AQuery aq ;
 
-	public LazyAdapterListFriends(Activity a, List<UserProfile> userProfile) {
+	public LazyAdapterListFriends(Activity a, List<UserProfile> userProfile, AQuery aq) {
 		this.userProfile=userProfile;
 		this.activity=a;
 		inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		this.aq=aq;
 		//imageLoader = new ImageLoader(activity.getApplicationContext());
 
 	}
@@ -53,12 +56,10 @@ public class LazyAdapterListFriends extends BaseAdapter {
 		View vi = convertView;
 		if (convertView == null)
 			vi = inflater.inflate(R.layout.friends_itemlist, null);
-		
-		TextView mNome = (TextView) vi.findViewById(R.id.username_friends);
-		mNome.setText(userProfile.get(position).username);
-		TextView mLocal = (TextView) vi.findViewById(R.id.informacao_friends);
-//		mLocal.setText(genero[position]+" from "+localizacao[position]);
-		
+		aq=aq.recycle(vi);
+		aq.id(R.id.username_friends).text(userProfile.get(position).username);
+		aq.id(R.id.informacao_friends).text(userProfile.get(position).location);
+		aq.id(R.id.imageViewPhoto).image(userProfile.get(position).avatar);
 		return vi;
 	}
 

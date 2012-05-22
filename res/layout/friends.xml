@@ -3,7 +3,41 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
+	
+    <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="fill_parent"
+            android:layout_height="29dp"
+            android:background="@drawable/bglinen"
+            android:orientation="horizontal" >
+			
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/youhave"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
+            <TextView
+                android:id="@+id/textViewNumberOfFriends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="@string/numFriends"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#008FBB"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/friends2"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        </LinearLayout>
+        
     <ListView
         android:id="@+id/friendsList"
         android:layout_width="fill_parent"

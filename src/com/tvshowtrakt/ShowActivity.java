@@ -12,10 +12,13 @@ import com.tvshowtrakt.adapters.LazyAdapterListSeasons;
 import com.tvshowtrakt.adapters.ViewPagerAdapterSeasons;
 import com.viewpagerindicator.TitlePageIndicator;
 
+import extras.Blooye;
+
 import greendroid.app.GDActivity;
 import greendroid.widget.ActionBarItem;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -35,10 +38,9 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class ShowActivity extends GDActivity {
 
-	private static final int OPTIONS = 0;
+	private static final int SHARE = 0;
+	private static final int SEARCH = 1;
 	private TvShow show;
-	private ImageView mPoster;
-	private ImageView mFanart;
 	boolean login;
 	String username;
 	String password;
@@ -53,7 +55,9 @@ public class ShowActivity extends GDActivity {
 	public Activity showActivity;
 	private AQuery aq;
 	public List<TvShowSeason> listSeasons;
-
+	ProgressDialog pg;
+	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,25 +68,13 @@ public class ShowActivity extends GDActivity {
 		
 		setTitle(show.title);
 		
-		addActionBarItem(ActionBarItem.Type.TakePhoto, OPTIONS);
-		ActionBarItem a = getActionBar().getItem(OPTIONS);
+		// Items da ActionBar
+		addActionBarItem(ActionBarItem.Type.Share, SHARE);
+		addActionBarItem(ActionBarItem.Type.Search, SEARCH);
 		showActivity = this;
 		aq= new AQuery(this);
 		// Obter as preferências da aplicação
 		getPrefs();
-
-	
-		
-		
-		mFanart = (ImageView) findViewById(R.id.imageViewFanArt);
-		mPoster = (ImageView) findViewById(R.id.imageViewPoster);
-
-		Bitmap poster = aq.getCachedImage(R.drawable.poster);
-		Bitmap placeholder =aq.getCachedImage(R.drawable.placeholder);
-		aq.id(R.id.imageViewFanArt).image(show.images.fanart,true,true,200,0,placeholder,AQuery.FADE_IN);
-		aq.id(R.id.imageViewPoster).image(show.images.poster,true,true,90,0,poster,AQuery.FADE_IN);
-		aq.id(R.id.textViewPercentagedLove).text(show.ratings.percentage+" %");
-		aq.id(R.id.textViewVotes).text(show.ratings.votes+" votes");
 
 		mAdapter = new ViewPagerAdapterSeasons(getApplicationContext());
 		//
@@ -115,8 +107,9 @@ public class ShowActivity extends GDActivity {
 	}
 
 	private void updateShow(String imdbID) {
-		mShowInfo = (LinearLayout) findViewById(R.id.showInfo);
-		mShowInfo.setVisibility(LinearLayout.INVISIBLE);
+		pg= ProgressDialog.show(showActivity, "Please Wait", "Loading "+show.title);
+		aq.id(R.id.linearLayoutImages).invisible();
+		aq.id(R.id.showInfo).invisible();
 		new downloadShow().execute(imdbID);
 
 	}
@@ -158,13 +151,14 @@ public class ShowActivity extends GDActivity {
 		protected TvShow doInBackground(String... params) {
 
 			try {
-
-				// ServiceManager manager = new ServiceManager();
-				// manager.setAuthentication(username,
-				// new Password().parseSHA1Password(password));
-				// manager.setApiKey(apikey);
+				if(show.overview==null){
+				 ServiceManager manager = new ServiceManager();
+				 manager.setAuthentication(username,
+				 new Password().parseSHA1Password(password));
+				 manager.setApiKey(apikey);
 				//
-				// TvShow t = manager.showService().summary(params[0]).fire();
+				 show = manager.showService().summary(params[0]).fire();
+				}
 				return show;
 
 			} catch (Exception e) {
@@ -178,6 +172,14 @@ public class ShowActivity extends GDActivity {
 		 */
 		protected void onPostExecute(TvShow result) {
 			if (e == null) {
+				Bitmap poster = aq.getCachedImage(R.drawable.poster);
+				Bitmap placeholder =aq.getCachedImage(R.drawable.placeholder);
+				aq.id(R.id.imageViewFanArt).image(show.images.fanart,true,true,200,0,placeholder,AQuery.FADE_IN);
+				aq.id(R.id.imageViewPoster).image(show.images.poster,true,true,90,0,poster,AQuery.FADE_IN);
+				aq.id(R.id.textViewPercentagedLove).text(show.ratings.percentage+" %");
+				aq.id(R.id.textViewVotes).text(show.ratings.votes+" votes");
+				
+				
 				aq.id(R.id.textView_overview).text(result.overview);
 				aq.id(R.id.textView_certification).text(result.certification);
 				aq.id(R.id.textView_country).text(result.country);
@@ -185,9 +187,14 @@ public class ShowActivity extends GDActivity {
 				aq.id(R.id.textView_airs).text(result.airTime + " on " + result.network);
 				SimpleDateFormat sdf1= new SimpleDateFormat("MMM dd, yyyy"); 
 				aq.id(R.id.textView_premiered).text(sdf1.format(result.firstAired));
-				mShowInfo.setVisibility(LinearLayout.VISIBLE);
+				aq.id(R.id.linearLayoutImages).visible();
+				aq.id(R.id.showInfo).visible();
+				pg.dismiss();
 			} else
-				goBlooey(e);
+				/**
+				 * Em caso de erro a excepção será tratada aqui.
+				 */
+				Blooye.goBlooey(showActivity,e);
 		}
 	}
 
@@ -258,7 +265,10 @@ public class ShowActivity extends GDActivity {
 //				mShowInfo.setVisibility(LinearLayout.VISIBLE);
 //				mLoading.setVisibility(LinearLayout.GONE);
 			} else
-				goBlooey(e);
+				/**
+				 * Em caso de erro a excepção será tratada aqui.
+				 */
+				Blooye.goBlooey(showActivity,e);
 		}
 	}
 
@@ -302,37 +312,31 @@ public class ShowActivity extends GDActivity {
 				
 
 			} else
-				goBlooey(e);
+				/**
+				 * Em caso de erro a excepção será tratada aqui.
+				 */
+				Blooye.goBlooey(showActivity,e);
 		}
 	}
 
-	/**
-	 * Em caso de erro a excepção será tratada aqui.
-	 */
-	private void goBlooey(Throwable t) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(
-				getApplicationContext());
 
-		builder.setTitle("Connection Error")
-				.setMessage("Movie Trakt can not connect with trakt service")
-				.setPositiveButton("OK", null).show();
-	}
-	
 	/**
 	 * Metodo para definir as acções da ActionBar
 	 */
 	public boolean onHandleActionBarItemClick(ActionBarItem item, int position) {
 		switch (item.getItemId()) {
 
-		case OPTIONS:
-			Toast.makeText(getApplicationContext(), "Options Pressed",
-					Toast.LENGTH_SHORT).show();
-		
-			
-			
-			
+		case SHARE:
+			Intent i = new Intent(Intent.ACTION_SEND);
+			i.setType("text/plain");
+			i.putExtra(Intent.EXTRA_SUBJECT, show.title);
+			i.putExtra(Intent.EXTRA_TEXT, show.url);
+			startActivity(Intent.createChooser(i, "Share "+show.title));
 			break;
 
+		case SEARCH:
+			this.startSearch(null, false, Bundle.EMPTY, false);
+			break;
 		default:
 			return super.onHandleActionBarItemClick(item, position);
 

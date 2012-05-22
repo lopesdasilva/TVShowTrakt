@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tvshowtrakt"
     android:versionCode="1"
-    android:versionName="0.3" >
+    android:versionName="0.8beta" >
 
     <uses-sdk android:minSdkVersion="4" />
 
@@ -16,7 +16,8 @@
         android:theme="@style/Theme.Trakt" >
         <activity
             android:name=".HomeActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,36 +30,91 @@
         </activity>
        <activity
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:name=".SearchableActivity" >
             <intent-filter >
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".GalleryActivity" >
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GalleryActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchableActivity" />
         </activity>
-        <activity android:name=".CalendarActivity" >
+        <activity
+            android:name=".CalendarActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchableActivity" />
         </activity>
-        <activity android:name=".ShowActivity" />
-        <activity android:name=".FriendsActivity" />
-        <activity android:name=".HistoryActivity" />
-        <activity android:name=".LibraryActivity" />
-        <activity android:name=".MyShowsActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".RecommendedActivity" />
-        <activity android:name=".SeenActivity" />
-        <activity android:name=".SeasonActivity" />
-        <activity android:name=".WatchlistActivity" />
-        <activity android:name=".TrendingActivity" >
+        <activity
+            android:name=".ShowActivity"
+            android:screenOrientation="portrait"  >
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchableActivity" />
+            </activity>
+        <activity 
+            android:name=".FriendsActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchableActivity" />
+        </activity>
+        <activity
+            android:name=".HistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LibraryActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchableActivity" />
+        </activity>
+        <activity
+            android:name=".MyShowsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ProfileActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchableActivity" />
+        </activity>
+        <activity
+            android:name=".RecommendedActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchableActivity" />
+        </activity>
+        <activity
+            android:name=".SeasonActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchableActivity" />
+        </activity>
+        <activity
+            android:name=".WatchlistActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchableActivity" />
+        </activity>
+        <activity
+            android:name=".TrendingActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchableActivity" />
